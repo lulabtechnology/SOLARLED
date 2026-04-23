@@ -1,38 +1,42 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
-import { Preloader } from '@/components/preloader';
 import './globals.css';
+import { Preloader } from '@/components/preloader';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter'
 });
 
-const spaceGrotesk = Space_Grotesk({
+const space = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-space'
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://solarled-landing.vercel.app'),
-  title: 'Solarled, S.A. | Paneles solares en Panamá',
+  title: 'Solar LED | Energía solar en Panamá',
   description:
-    'Suministro e instalación de paneles solares en Panamá para hogares y negocios que quieren reducir su factura eléctrica con una solución moderna, confiable y profesional.',
+    'Solar LED presenta soluciones de energía solar para hogares y negocios en Panamá, con enfoque en ahorro, instalación profesional y acompañamiento.',
   openGraph: {
-    title: 'Solarled, S.A. | Invierte una vez. Ahorra durante años.',
+    title: 'Solar LED | Energía solar en Panamá',
     description:
-      'Landing premium para captar leads, cotizaciones y reuniones de una empresa solar con atención en Panamá.',
-    images: ['/images/og/solarled-og.jpg']
-  },
-  icons: {
-    icon: '/favicon.svg'
+      'Conoce las soluciones solares de Solar LED para hogares y negocios, junto con su propuesta comercial y vías de contacto.',
+    url: 'https://solarled-landing.vercel.app',
+    siteName: 'Solar LED',
+    locale: 'es_PA',
+    type: 'website'
   }
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="es" className="scroll-smooth">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} bg-ink text-ivory antialiased`}>
+    <html lang="es" className={`${inter.variable} ${space.variable}`}>
+      <body className="bg-ink text-white antialiased">
         <Preloader />
         {children}
       </body>

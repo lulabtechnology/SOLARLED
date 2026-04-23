@@ -20,7 +20,7 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="section-shell pt-4">
-        <div className="rounded-[1.45rem] border border-white/10 bg-[#041126]/78 px-4 py-3 shadow-glow backdrop-blur-xl sm:px-5 lg:px-6">
+        <div className="rounded-[1.45rem] border border-white/10 bg-[#071440]/82 px-4 py-3 shadow-glow backdrop-blur-xl sm:px-5 lg:px-6">
           <div className="flex items-center justify-between gap-4">
             <a href="#inicio" className="min-w-0 shrink-0">
               <Logo />
@@ -39,7 +39,7 @@ export function Navbar() {
                 href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#04112d] transition hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-cyan px-5 py-3 text-sm font-semibold text-white transition hover:scale-[1.02]"
               >
                 <PhoneCall className="h-4 w-4" />
                 Cotizar por WhatsApp
@@ -63,7 +63,7 @@ export function Navbar() {
                   <a
                     key={link.href}
                     href={link.href}
-                    className="text-sm font-medium text-white/84"
+                    className="text-sm font-medium text-white/85"
                     onClick={() => setOpen(false)}
                   >
                     {link.label}
@@ -73,7 +73,7 @@ export function Navbar() {
                   href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="mt-2 inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#04112d]"
+                  className="mt-2 inline-flex items-center justify-center rounded-full bg-cyan px-5 py-3 text-sm font-semibold text-white"
                   onClick={() => setOpen(false)}
                 >
                   Cotizar por WhatsApp
