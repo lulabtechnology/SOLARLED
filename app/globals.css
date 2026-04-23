@@ -20,8 +20,9 @@ body {
 body {
   font-family: var(--font-inter), sans-serif;
   background:
-    radial-gradient(circle at top, rgba(22, 58, 91, 0.6), transparent 34%),
-    linear-gradient(180deg, #08111b 0%, #0a1420 32%, #0d1725 100%);
+    radial-gradient(circle at top, rgba(43, 88, 214, 0.22), transparent 28%),
+    radial-gradient(circle at left, rgba(8, 33, 115, 0.18), transparent 30%),
+    linear-gradient(180deg, #020819 0%, #051133 28%, #07154a 100%);
 }
 
 h1,

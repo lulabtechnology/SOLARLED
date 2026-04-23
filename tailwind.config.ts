@@ -9,17 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: '#08111B',
-        navy: '#0C1F33',
-        steel: '#5B6572',
-        mist: '#E9EEF2',
+        ink: '#020819',
+        navy: '#07154A',
+        steel: '#6A738B',
+        mist: '#E9EEF7',
         ivory: '#F7F9FB',
         ember: '#D7A53A',
-        cyan: '#5FD2FF'
+        cyan: '#5A9CFF'
       },
       boxShadow: {
-        glow: '0 0 0 1px rgba(255,255,255,0.08), 0 30px 80px rgba(8,17,27,0.35)',
-        card: '0 18px 45px rgba(8,17,27,0.10)'
+        glow: '0 0 0 1px rgba(255,255,255,0.08), 0 30px 80px rgba(2,8,25,0.42)',
+        card: '0 18px 45px rgba(2,8,25,0.12)'
       },
       borderRadius: {
         '4xl': '2rem'

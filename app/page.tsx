@@ -20,7 +20,7 @@ const gallery = [
     src: '/videos/gallery/rooftop-vertical.mp4',
     alt: 'Video vertical de paneles solares en un rooftop',
     title: 'Recorrido real',
-    copy: 'Material auténtico de instalaciones reales para comunicar confianza.'
+    copy: 'Recorrido visual de una instalación real para reforzar confianza.'
   },
   {
     type: 'image' as const,
@@ -109,7 +109,7 @@ function HeroSection() {
           <h1 className="mt-6 max-w-3xl text-balance text-[2.65rem] font-bold leading-[0.93] text-white sm:text-6xl lg:text-7xl">
             Invierte una vez. <span className="text-ember">Ahorra durante años.</span>
           </h1>
-          <p className="mt-6 max-w-xl text-balance text-base leading-8 text-white/72 sm:text-lg">
+          <p className="mt-6 max-w-xl text-balance text-base leading-8 text-white/78 sm:text-lg">
             Suministro e instalación de paneles solares para hogares y negocios que quieren reducir su factura eléctrica con una solución moderna, confiable y profesional.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -135,7 +135,7 @@ function HeroSection() {
               'Soluciones residenciales y comerciales',
               'Experiencia, calidad y atención rápida'
             ].map((item) => (
-              <div key={item} className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white/72">
+              <div key={item} className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white/75">
                 {item}
               </div>
             ))}
@@ -155,29 +155,31 @@ function HeroSection() {
                 className="object-cover object-center"
                 sizes="(max-width: 1024px) 100vw, 55vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                <p className="text-sm font-medium text-white/90">Haz que tu techo trabaje a tu favor.</p>
-                <p className="mt-2 max-w-md text-sm leading-6 text-white/68">
+                <p className="text-sm font-medium text-white/92">Haz que tu techo trabaje a tu favor.</p>
+                <p className="mt-2 max-w-md text-sm leading-6 text-white/72">
                   Diseño visual enfocado en ahorro, confianza y una percepción corporativa de alto valor.
                 </p>
               </div>
             </div>
 
             <div className="flex gap-4 lg:flex-col">
-              <div className="panel relative h-[230px] flex-1 overflow-hidden rounded-[2rem] bg-[#0b1826] sm:h-[280px] lg:h-[250px]">
-                <video
-                  className="h-full w-full object-cover"
-                  src="/videos/hero/hero-vertical.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/65 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-4">
-                  <p className="text-sm font-semibold text-white">Instalaciones reales</p>
+              <div className="panel relative flex-1 overflow-hidden rounded-[2rem] bg-[#09133d]">
+                <div className="relative aspect-[3/4] min-h-[230px] sm:min-h-[280px] lg:min-h-[250px]">
+                  <video
+                    className="absolute inset-0 h-full w-full object-cover"
+                    src="/videos/hero/hero-vertical.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <p className="text-sm font-semibold text-white">Instalaciones reales</p>
+                  </div>
                 </div>
               </div>
               <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 text-white shadow-glow">
@@ -207,7 +209,7 @@ function TrustRibbon() {
               src="/images/tech/inverter-wall.jpg"
               alt="Instalación técnica con baterías e inversor"
               fill
-              className="object-cover"
+              className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 35vw"
             />
           </div>
@@ -216,12 +218,12 @@ function TrustRibbon() {
             <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
               Instalaciones pensadas para durar, rendir y responder bien.
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/72">
+            <p className="mt-4 max-w-2xl text-base leading-8 text-white/74">
               La percepción correcta aquí no es “algo eléctrico más”, sino una solución moderna que se instala con orden, atención al detalle y criterio técnico. Eso es lo que ayuda a que la inversión se sienta seria desde el primer vistazo.
             </p>
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {['Instalación profesional', 'Atención rápida', 'Acompañamiento claro', 'Enfoque en ahorro duradero'].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/80">
+                <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/82">
                   {item}
                 </div>
               ))}
@@ -242,7 +244,7 @@ function BenefitsSection() {
           <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-5xl">
             Tu factura no tiene que seguir marcando el ritmo.
           </h2>
-          <p className="mt-5 text-base leading-8 text-white/72 sm:text-lg">
+          <p className="mt-5 text-base leading-8 text-white/74 sm:text-lg">
             La energía solar ayuda a transformar un gasto recurrente en una inversión estratégica. El mensaje central de la marca debe sentirse así: menos presión mensual, más control y más tranquilidad a largo plazo.
           </p>
         </Reveal>
@@ -256,7 +258,7 @@ function BenefitsSection() {
                   <Icon className="h-5 w-5" />
                 </div>
                 <h3 className="mt-5 text-xl font-bold text-white">{benefit.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/72">{benefit.copy}</p>
+                <p className="mt-3 text-sm leading-7 text-white/74">{benefit.copy}</p>
               </Reveal>
             );
           })}
@@ -275,7 +277,7 @@ function ProcessSection() {
           <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
             Un proceso claro, rápido y profesional.
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-8 text-white/72">
+          <p className="mt-4 max-w-xl text-base leading-8 text-white/74">
             La experiencia de compra también debe sentirse premium. Por eso la landing se apoya en un flujo simple, entendible y visualmente sólido.
           </p>
           <div className="mt-8 space-y-4">
@@ -283,7 +285,7 @@ function ProcessSection() {
               <div key={step.title} className="rounded-[1.5rem] border border-white/10 bg-ink/40 p-5">
                 <div className="text-sm font-semibold uppercase tracking-[0.25em] text-ember">Paso {index + 1}</div>
                 <div className="mt-2 text-xl font-bold text-white">{step.title}</div>
-                <p className="mt-2 text-sm leading-7 text-white/70">{step.description}</p>
+                <p className="mt-2 text-sm leading-7 text-white/72">{step.description}</p>
               </div>
             ))}
           </div>
@@ -292,20 +294,22 @@ function ProcessSection() {
         <Reveal className="grid gap-4 sm:grid-cols-2">
           <VideoCard src="/videos/gallery/install-team.mp4" title="Instalación en sitio" copy="Prueba visual directa de ejecución y equipo humano." />
           <VideoCard src="/videos/gallery/equipment-move.mp4" title="Logística real" copy="El proyecto no es teoría: es trabajo real en campo." />
-          <div className="relative min-h-[250px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] sm:col-span-2">
-            <Image
-              src="/images/gallery/residential-roof.jpg"
-              alt="Techo residencial con paneles solares"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-transparent to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-5">
-              <div className="text-sm font-semibold text-white">Residencial o comercial</div>
-              <p className="mt-2 max-w-xl text-sm leading-6 text-white/72">
-                La estructura visual del sitio deja claro que la propuesta puede adaptarse tanto a hogares como a negocios.
-              </p>
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-glow sm:col-span-2">
+            <div className="relative aspect-[16/10] min-h-[290px] overflow-hidden">
+              <Image
+                src="/images/gallery/residential-roof.jpg"
+                alt="Techo residencial con paneles solares"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-5">
+                <div className="text-sm font-semibold text-white">Residencial o comercial</div>
+                <p className="mt-2 max-w-xl text-sm leading-6 text-white/74">
+                  La estructura visual del sitio deja claro que la propuesta puede adaptarse tanto a hogares como a negocios.
+                </p>
+              </div>
             </div>
           </div>
         </Reveal>
@@ -333,7 +337,7 @@ function ServicesSection() {
                 </span>
                 <h3 className="text-lg font-semibold text-white">{service}</h3>
               </div>
-              <p className="mt-4 text-sm leading-7 text-white/70">
+              <p className="mt-4 text-sm leading-7 text-white/72">
                 Bloque construido con peso visual para reforzar la propuesta de valor sin recurrir a elementos genéricos o vacíos.
               </p>
             </Reveal>
@@ -353,7 +357,7 @@ function GallerySection() {
           <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-5xl">
             Curaduría visual pensada para vender confianza, no para llenar espacio.
           </h2>
-          <p className="mt-4 text-base leading-8 text-white/72">
+          <p className="mt-4 text-base leading-8 text-white/74">
             El material real se ordena con intención editorial para que la marca se perciba seria, actual y bien ejecutada.
           </p>
         </Reveal>
@@ -362,14 +366,20 @@ function GallerySection() {
           {gallery.map((item, index) => (
             <Reveal
               key={`${item.title}-${index}`}
-              className={`group relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] ${index === 0 ? 'md:col-span-2 md:row-span-2' : ''}`}
+              className={`group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-glow ${index === 0 ? 'md:col-span-2' : ''}`}
             >
-              <div className={`relative ${index === 0 ? 'min-h-[440px]' : 'min-h-[320px]'}`}>
+              <div className={`relative overflow-hidden ${index === 0 ? 'aspect-[16/10] md:aspect-[18/10]' : 'aspect-[4/5] md:aspect-[4/3]'}`}>
                 {item.type === 'image' ? (
-                  <Image src={item.src} alt={item.alt} fill className="object-cover transition duration-700 group-hover:scale-[1.035]" sizes="(max-width: 1280px) 100vw, 33vw" />
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition duration-700 group-hover:scale-[1.035]"
+                    sizes={index === 0 ? '(max-width: 1280px) 100vw, 66vw' : '(max-width: 1280px) 100vw, 33vw'}
+                  />
                 ) : (
                   <video
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
+                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
                     src={item.src}
                     autoPlay
                     muted
@@ -378,10 +388,10 @@ function GallerySection() {
                     preload="metadata"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/18 to-transparent" />
                 <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <div className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan/90">{item.title}</div>
-                  <p className="mt-3 max-w-md text-sm leading-7 text-white/75">{item.copy}</p>
+                  <div className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan/95">{item.title}</div>
+                  <p className="mt-3 max-w-md text-sm leading-7 text-white/78">{item.copy}</p>
                 </div>
               </div>
             </Reveal>
@@ -402,7 +412,7 @@ function AuthoritySection() {
             <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
               Energía limpia con una presencia corporativa fuerte y cercana.
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/72">
+            <p className="mt-4 max-w-2xl text-base leading-8 text-white/74">
               Esta landing se construyó para convencer a alguien que sí puede invertir: menos promesa vacía, más claridad, más evidencia visual y una sensación de marca que inspire seguridad desde el primer vistazo.
             </p>
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -412,12 +422,12 @@ function AuthoritySection() {
               <Stat label="Aplicación" value="Hogar y negocio" icon={House} />
             </div>
           </Reveal>
-          <Reveal className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0f2133] to-[#0b1520] p-6 sm:p-8">
+          <Reveal className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0c1d61] to-[#060f34] p-6 sm:p-8">
             <div className="text-xs font-semibold uppercase tracking-[0.28em] text-ember">Cierre racional + emocional</div>
             <p className="mt-6 text-3xl font-bold leading-tight text-white sm:text-4xl">
               Haz que tu próxima factura se sienta más liviana.
             </p>
-            <p className="mt-4 text-base leading-8 text-white/72">
+            <p className="mt-4 text-base leading-8 text-white/74">
               Una solución solar bien instalada puede ayudarte a bajar la presión del gasto eléctrico y a tomar una decisión más inteligente para tu propiedad o negocio.
             </p>
             <a
@@ -444,7 +454,7 @@ function FAQSection() {
           <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
             Dudas habituales antes de dar el paso.
           </h2>
-          <p className="mt-4 max-w-lg text-base leading-8 text-white/72">
+          <p className="mt-4 max-w-lg text-base leading-8 text-white/74">
             Esta sección reduce fricción comercial y ayuda a que más personas pasen de la curiosidad a la conversación directa.
           </p>
         </Reveal>
@@ -463,15 +473,15 @@ function ContactSection() {
     <section id="contacto" className="py-14 lg:py-20">
       <div className="section-shell">
         <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Reveal className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#102130] to-[#0b1520] p-6 sm:p-8">
+          <Reveal className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0c1d61] to-[#060f34] p-6 sm:p-8">
             <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Contacto / cotización</span>
             <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
               Solicita una evaluación y empieza a bajar el peso de tu factura.
             </h2>
-            <p className="mt-4 text-base leading-8 text-white/72">
+            <p className="mt-4 text-base leading-8 text-white/74">
               El formulario está pensado para convertir mejor: recoge lo justo para iniciar una conversación real por WhatsApp o correo sin fricción innecesaria.
             </p>
-            <div className="mt-8 space-y-5 text-sm leading-7 text-white/75">
+            <div className="mt-8 space-y-5 text-sm leading-7 text-white/78">
               <InfoLine icon={Phone} label="Teléfono" value={siteConfig.phone} />
               <InfoLine icon={Mail} label="Correo" value={siteConfig.email} />
               <InfoLine icon={MapPin} label="Dirección" value={siteConfig.address} />
@@ -489,7 +499,7 @@ function ContactSection() {
 function Footer() {
   return (
     <footer className="border-t border-white/10 py-8">
-      <div className="section-shell flex flex-col gap-3 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
+      <div className="section-shell flex flex-col gap-3 text-sm text-white/58 sm:flex-row sm:items-center sm:justify-between">
         <p>{siteConfig.brand} · {siteConfig.coverage}</p>
         <p>{siteConfig.email} · WhatsApp {siteConfig.whatsappDisplay}</p>
       </div>
@@ -521,7 +531,7 @@ function InfoLine({ icon: Icon, label, value }: { icon: typeof Phone; label: str
       <Icon className="mt-1 h-4 w-4 shrink-0 text-ember" />
       <div>
         <div className="text-xs uppercase tracking-[0.24em] text-white/45">{label}</div>
-        <div className="mt-1 text-white/85">{value}</div>
+        <div className="mt-1 text-white/88">{value}</div>
       </div>
     </div>
   );
@@ -529,13 +539,13 @@ function InfoLine({ icon: Icon, label, value }: { icon: typeof Phone; label: str
 
 function VideoCard({ src, title, copy }: { src: string; title: string; copy: string }) {
   return (
-    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03]">
-      <div className="relative h-[320px]">
-        <video className="h-full w-full object-cover" src={src} autoPlay muted loop playsInline preload="metadata" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink to-transparent" />
+    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-glow">
+      <div className="relative aspect-[4/5] min-h-[320px] overflow-hidden sm:aspect-[4/3]">
+        <video className="absolute inset-0 h-full w-full object-cover" src={src} autoPlay muted loop playsInline preload="metadata" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
         <div className="absolute inset-x-0 bottom-0 p-5">
           <div className="text-sm font-semibold text-white">{title}</div>
-          <p className="mt-2 text-sm leading-6 text-white/72">{copy}</p>
+          <p className="mt-2 text-sm leading-6 text-white/74">{copy}</p>
         </div>
       </div>
     </div>

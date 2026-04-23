@@ -18,21 +18,21 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/75 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
-        <a href="#inicio" className="min-w-0">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/85 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
+        <a href="#inicio" className="min-w-0 shrink-0">
           <Logo />
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center gap-5 xl:flex 2xl:gap-7">
           {links.map((link) => (
-            <a key={link.href} href={link.href} className="text-sm font-medium text-white/78 transition hover:text-white">
+            <a key={link.href} href={link.href} className="text-sm font-medium text-white/80 transition hover:text-white">
               {link.label}
             </a>
           ))}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden xl:block shrink-0">
           <a
             href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
             target="_blank"
@@ -46,7 +46,7 @@ export function Navbar() {
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white lg:hidden"
+          className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white xl:hidden"
           onClick={() => setOpen((prev) => !prev)}
           aria-label="Abrir menú"
         >
@@ -55,7 +55,7 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div className="border-t border-white/10 bg-[#0b1622] px-4 py-4 lg:hidden">
+        <div className="border-t border-white/10 bg-[#08133d] px-4 py-4 xl:hidden">
           <div className="flex flex-col gap-4">
             {links.map((link) => (
               <a
