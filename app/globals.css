@@ -14,15 +14,15 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   font-family: var(--font-inter), sans-serif;
   background:
-    radial-gradient(circle at top right, rgba(61, 99, 210, 0.24), transparent 28%),
-    radial-gradient(circle at top left, rgba(11, 27, 81, 0.35), transparent 28%),
-    linear-gradient(180deg, #04091f 0%, #071440 34%, #0b1f5d 100%);
+    radial-gradient(circle at top right, rgba(5, 92, 214, 0.18), transparent 30%),
+    radial-gradient(circle at top left, rgba(2, 17, 52, 0.32), transparent 26%),
+    linear-gradient(180deg, #020716 0%, #03122d 30%, #04173c 100%);
 }
 
 h1,
@@ -40,7 +40,7 @@ video {
 }
 
 ::selection {
-  background: rgba(61, 99, 210, 0.35);
+  background: rgba(87, 172, 255, 0.28);
   color: white;
 }
 
@@ -75,7 +75,7 @@ video {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.28em;
-  color: #5b7cff;
+  color: #5A9CFF;
 }
 
 .section-title {
@@ -106,11 +106,11 @@ video {
 
 .panel-card,
 .video-card {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.048);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(255, 255, 255, 0.045);
   border-radius: 2rem;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 30px 80px rgba(2, 8, 25, 0.42);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(10px);
 }
 
 .glass-panel {
@@ -121,13 +121,8 @@ video {
   backdrop-filter: blur(20px);
 }
 
-@keyframes pulse-ring {
-  0%, 100% { transform: scale(1); opacity: 0.55; }
-  50% { transform: scale(1.08); opacity: 1; }
-}
-
-@keyframes shine-slide {
+@keyframes loader {
   0% { transform: translateX(-100%); }
-  50% { transform: translateX(-18%); }
+  50% { transform: translateX(-20%); }
   100% { transform: translateX(100%); }
 }

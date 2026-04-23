@@ -18,7 +18,7 @@ export function ContactForm() {
 
   const message = useMemo(() => {
     return [
-      'Hola Solar LED, quiero solicitar una evaluación.',
+      'Hola Solarled, quiero solicitar una evaluación.',
       `Nombre: ${form.nombre || '-'}`,
       `Teléfono: ${form.telefono || '-'}`,
       `Correo: ${form.correo || '-'}`,
@@ -53,7 +53,11 @@ export function ContactForm() {
           <option className="text-ink">Otro</option>
         </select>
       </label>
-      <Field label="Factura o consumo aproximado" value={form.factura} onChange={(value) => setForm({ ...form, factura: value })} />
+      <Field
+        label="Factura o consumo aproximado"
+        value={form.factura}
+        onChange={(value) => setForm({ ...form, factura: value })}
+      />
       <label className="space-y-2 text-sm text-white/72 sm:col-span-2">
         <span>Mensaje</span>
         <textarea
@@ -61,12 +65,13 @@ export function ContactForm() {
           value={form.mensaje}
           onChange={(event) => setForm({ ...form, mensaje: event.target.value })}
           className="w-full rounded-3xl border border-white/10 bg-white/[0.04] px-4 py-3 text-white outline-none transition focus:border-cyan/70"
+          placeholder="Cuéntanos un poco sobre tu propiedad o lo que deseas evaluar."
         />
       </label>
-      <div className="flex flex-col gap-3 pt-2 sm:col-span-2 sm:flex-row">
+      <div className="sm:col-span-2 flex flex-col gap-3 pt-2 sm:flex-row">
         <button
           type="submit"
-          className="inline-flex min-h-12 items-center justify-center rounded-full bg-cyan px-6 text-sm font-semibold text-white transition hover:scale-[1.01]"
+          className="inline-flex min-h-12 items-center justify-center rounded-full bg-ember px-6 text-sm font-semibold text-ink transition hover:scale-[1.01]"
         >
           Enviar por WhatsApp
         </button>
