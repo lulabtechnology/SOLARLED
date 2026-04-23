@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import { Preloader } from '@/components/preloader';
 import './globals.css';
 
 const inter = Inter({
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" className="scroll-smooth">
       <body className={`${inter.variable} ${spaceGrotesk.variable} bg-ink text-ivory antialiased`}>
+        <Preloader />
         {children}
       </body>
     </html>

@@ -20,9 +20,9 @@ body {
 body {
   font-family: var(--font-inter), sans-serif;
   background:
-    radial-gradient(circle at top, rgba(43, 88, 214, 0.22), transparent 28%),
-    radial-gradient(circle at left, rgba(8, 33, 115, 0.18), transparent 30%),
-    linear-gradient(180deg, #020819 0%, #051133 28%, #07154a 100%);
+    radial-gradient(circle at top right, rgba(5, 92, 214, 0.18), transparent 30%),
+    radial-gradient(circle at top left, rgba(2, 17, 52, 0.32), transparent 26%),
+    linear-gradient(180deg, #020716 0%, #03122d 30%, #04173c 100%);
 }
 
 h1,
@@ -34,23 +34,51 @@ h6 {
   font-family: var(--font-space), sans-serif;
 }
 
+img,
+video {
+  display: block;
+}
+
 ::selection {
-  background: rgba(215, 165, 58, 0.32);
+  background: rgba(87, 172, 255, 0.28);
   color: white;
 }
 
 .section-shell {
-  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
-}
-
-.grid-fade {
-  background-size: 38px 38px;
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
 .text-balance {
   text-wrap: balance;
 }
 
-.panel {
-  @apply rounded-[2rem] border border-white/10 bg-white/[0.035] shadow-glow;
+.section-kicker {
+  @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.28em] text-cyan;
+}
+
+.section-title {
+  @apply text-balance text-3xl font-bold text-white sm:text-5xl;
+}
+
+.section-copy {
+  @apply text-base leading-8 text-white/74 sm:text-lg;
+}
+
+.panel-card {
+  @apply rounded-[2rem] border border-white/10 bg-white/[0.045] shadow-glow backdrop-blur-[10px];
+}
+
+.glass-panel {
+  @apply border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.12)_0%,rgba(255,255,255,0.06)_100%)] shadow-glow backdrop-blur-[20px];
+}
+
+.video-card {
+  @apply border border-white/10 bg-white/[0.04] shadow-glow;
+}
+
+
+@keyframes loader {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(-20%); }
+  100% { transform: translateX(100%); }
 }

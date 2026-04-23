@@ -1,5 +1,24 @@
 import Image from 'next/image';
-import { ArrowRight, BadgeCheck, Building2, Gauge, House, Mail, MapPin, Phone, ShieldCheck, SunMedium, Zap } from 'lucide-react';
+import type { ReactNode } from 'react';
+import {
+  ArrowRight,
+  BadgeCheck,
+  BarChart3,
+  BatteryCharging,
+  Building2,
+  ChartNoAxesCombined,
+  FileCheck2,
+  Gauge,
+  House,
+  Mail,
+  MapPin,
+  Phone,
+  Play,
+  ShieldCheck,
+  SunMedium,
+  Wallet,
+  Zap
+} from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
 import { FAQItem } from '@/components/faq';
 import { Reveal, Stagger } from '@/components/motion';
@@ -7,86 +26,57 @@ import { Navbar } from '@/components/navbar';
 import { WhatsAppFloat } from '@/components/whatsapp-float';
 import { faqs, processSteps, services, siteConfig } from '@/lib/site';
 
-const gallery = [
+const highlights = [
   {
-    type: 'image' as const,
-    src: '/images/gallery/rooftop-skyline.jpg',
-    alt: 'Instalación de paneles solares en techo urbano en Panamá',
-    title: 'Escala y proyección',
-    copy: 'Un sistema solar bien planteado empieza por una visión clara del proyecto.'
+    title: 'Menos presión mensual',
+    copy: 'La propuesta está diseñada para ayudarte a bajar el peso de tu factura eléctrica con una solución bien planteada.',
+    icon: Wallet
   },
   {
-    type: 'video' as const,
-    src: '/videos/gallery/rooftop-vertical.mp4',
-    alt: 'Video vertical de paneles solares en un rooftop',
-    title: 'Recorrido real',
-    copy: 'Recorrido visual de una instalación real para reforzar confianza.'
+    title: 'Residencial y comercial',
+    copy: 'Se atienden hogares, comercios y proyectos que necesitan una solución seria, bien presentada y bien ejecutada.',
+    icon: Building2
   },
   {
-    type: 'image' as const,
-    src: '/images/tech/inverter-wall.jpg',
-    alt: 'Sistema técnico de paneles solares con inversor y baterías',
-    title: 'Criterio técnico',
-    copy: 'La instalación debe verse tan seria como la inversión que representa.'
-  },
-  {
-    type: 'video' as const,
-    src: '/videos/gallery/install-team.mp4',
-    alt: 'Equipo instalando sistema solar',
-    title: 'Ejecución profesional',
-    copy: 'No se trata solo de vender un sistema: se trata de ejecutarlo bien.'
-  },
-  {
-    type: 'image' as const,
-    src: '/images/gallery/residential-roof.jpg',
-    alt: 'Techo residencial con paneles solares',
-    title: 'Solución residencial',
-    copy: 'También hay espacio para decisiones inteligentes en el hogar.'
-  },
-  {
-    type: 'video' as const,
-    src: '/videos/gallery/installation-montage.mp4',
-    alt: 'Montaje de instalaciones solares',
-    title: 'Proceso vivo',
-    copy: 'El trabajo en campo es parte de la credibilidad de la marca.'
+    title: 'Respaldo técnico',
+    copy: 'El proyecto no termina con la instalación. También importa el criterio técnico, el monitoreo y el acompañamiento.',
+    icon: ShieldCheck
   }
 ];
 
-const benefits = [
+const solutions = [
   {
-    icon: SunMedium,
-    title: 'Ahorro con visión de largo plazo',
-    copy: 'La decisión no es solo tecnológica: es financiera. Inviertes hoy para respirar mejor durante años.'
+    title: 'Soluciones residenciales',
+    copy: 'Para hogares que quieren empezar a ahorrar con una instalación limpia, moderna y pensada para rendir bien con el paso del tiempo.',
+    image: '/images/gallery/residential-roof.jpg',
+    alt: 'Techo residencial con paneles solares'
   },
   {
-    icon: Gauge,
-    title: 'Menor presión en la factura',
-    copy: 'La promesa central es clara: bajar el peso de tu factura eléctrica con una solución bien planteada.'
-  },
-  {
-    icon: Building2,
-    title: 'Más valor para la propiedad o negocio',
-    copy: 'Un sistema solar bien instalado transmite modernidad, previsión y capacidad de largo plazo.'
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Tranquilidad y respaldo',
-    copy: 'Experiencia, calidad y atención rápida para tomar una decisión con menos dudas y más claridad.'
+    title: 'Soluciones comerciales',
+    copy: 'Para negocios y propiedades que necesitan una propuesta de mayor escala con criterio financiero, técnico y operativo.',
+    image: '/images/gallery/rooftop-skyline.jpg',
+    alt: 'Sistema de paneles solares en techo comercial'
   }
+];
+
+const proposalStats = [
+  { label: 'Potencia propuesta', value: '37.2 kWp' },
+  { label: 'Cobertura estimada', value: '124%' },
+  { label: 'Retorno estimado', value: '23 meses' },
+  { label: 'Ganancia proyectada', value: '1443%' }
 ];
 
 export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main id="inicio">
+      <main id="inicio" className="overflow-x-hidden">
         <HeroSection />
-        <TrustRibbon />
-        <BenefitsSection />
+        <OverviewSection />
+        <SolutionsSection />
+        <ProposalSection />
         <ProcessSection />
         <ServicesSection />
-        <GallerySection />
-        <AuthoritySection />
         <FAQSection />
         <ContactSection />
       </main>
@@ -98,135 +88,73 @@ export default function HomePage() {
 
 function HeroSection() {
   return (
-    <section className="relative overflow-hidden pt-8 lg:pt-12">
-      <div className="pointer-events-none absolute inset-0 bg-grid-fade grid-fade opacity-[0.08]" />
-      <div className="section-shell relative grid items-center gap-8 pb-16 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:pb-24 lg:pt-10">
-        <Reveal className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-cyan/25 bg-cyan/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-cyan">
-            <Zap className="h-3.5 w-3.5" />
-            Energía solar premium en Panamá
-          </span>
-          <h1 className="mt-6 max-w-3xl text-balance text-[2.65rem] font-bold leading-[0.93] text-white sm:text-6xl lg:text-7xl">
-            Invierte una vez. <span className="text-ember">Ahorra durante años.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-balance text-base leading-8 text-white/78 sm:text-lg">
-            Suministro e instalación de paneles solares para hogares y negocios que quieren reducir su factura eléctrica con una solución moderna, confiable y profesional.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex min-h-12 items-center justify-center rounded-full bg-ember px-6 text-sm font-semibold text-ink transition hover:scale-[1.01]"
-            >
-              Cotizar por WhatsApp
-            </a>
-            <a
-              href="#contacto"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 text-sm font-semibold text-white/88 transition hover:border-white/20"
-            >
-              Solicitar evaluación
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-3">
-            {[
-              'Atención de proyectos desde Colón hasta Chiriquí',
-              'Soluciones residenciales y comerciales',
-              'Experiencia, calidad y atención rápida'
-            ].map((item) => (
-              <div key={item} className="rounded-3xl border border-white/10 bg-white/[0.03] p-4 text-sm leading-6 text-white/75">
-                {item}
-              </div>
-            ))}
-          </div>
-        </Reveal>
+    <section className="relative flex min-h-[100svh] items-end overflow-hidden">
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/videos/hero/hero-vertical.mp4"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+      />
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(2,7,23,0.45)_0%,rgba(2,7,23,0.58)_26%,rgba(2,7,23,0.82)_74%,rgba(2,7,23,0.96)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(7,87,194,0.34),transparent_28%),radial-gradient(circle_at_top_left,rgba(14,33,81,0.28),transparent_30%)]" />
 
-        <Reveal className="relative">
-          <div className="absolute -left-10 top-8 h-40 w-40 rounded-full bg-cyan/20 blur-3xl" />
-          <div className="absolute -right-6 bottom-10 h-36 w-36 rounded-full bg-ember/15 blur-3xl" />
-          <div className="relative grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="panel relative min-h-[420px] overflow-hidden rounded-[2rem] border border-white/10 bg-navy">
-              <Image
-                src="/images/hero/hero-desktop.jpg"
-                alt="Techo con paneles solares y skyline urbano"
-                fill
-                priority
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 55vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/15 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                <p className="text-sm font-medium text-white/92">Haz que tu techo trabaje a tu favor.</p>
-                <p className="mt-2 max-w-md text-sm leading-6 text-white/72">
-                  Diseño visual enfocado en ahorro, confianza y una percepción corporativa de alto valor.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4 lg:flex-col">
-              <div className="panel relative flex-1 overflow-hidden rounded-[2rem] bg-[#09133d]">
-                <div className="relative aspect-[3/4] min-h-[230px] sm:min-h-[280px] lg:min-h-[250px]">
-                  <video
-                    className="absolute inset-0 h-full w-full object-cover"
-                    src="/videos/hero/hero-vertical.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <p className="text-sm font-semibold text-white">Instalaciones reales</p>
-                  </div>
-                </div>
-              </div>
-              <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-5 text-white shadow-glow">
-                <div className="flex items-center gap-2 text-sm font-semibold text-ember">
-                  <BadgeCheck className="h-4 w-4" />
-                  Menos presión mes a mes
-                </div>
-                <p className="mt-3 text-2xl font-bold leading-tight text-white sm:text-3xl">
-                  Convierte tu factura eléctrica en una decisión más inteligente.
-                </p>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-function TrustRibbon() {
-  return (
-    <section className="pb-8 lg:pb-16">
-      <div className="section-shell">
-        <div className="panel grid items-center gap-6 overflow-hidden rounded-[2.2rem] p-5 lg:grid-cols-[0.85fr_1.15fr] lg:p-8">
-          <div className="relative min-h-[300px] overflow-hidden rounded-[1.75rem] bg-white/5">
-            <Image
-              src="/images/tech/inverter-wall.jpg"
-              alt="Instalación técnica con baterías e inversor"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 1024px) 100vw, 35vw"
-            />
-          </div>
-          <Reveal>
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Confianza y seriedad</span>
-            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
-              Instalaciones pensadas para durar, rendir y responder bien.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/74">
-              La percepción correcta aquí no es “algo eléctrico más”, sino una solución moderna que se instala con orden, atención al detalle y criterio técnico. Eso es lo que ayuda a que la inversión se sienta seria desde el primer vistazo.
+      <div className="section-shell relative z-10 flex w-full items-end pb-8 pt-28 sm:pb-10 lg:pb-14">
+        <div className="grid w-full gap-8 xl:grid-cols-[1.1fr_0.9fr] xl:items-end">
+          <Reveal className="max-w-4xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/90 backdrop-blur-md">
+              <Zap className="h-3.5 w-3.5 text-cyan" />
+              Energía solar con criterio en Panamá
+            </span>
+            <h1 className="mt-6 max-w-4xl text-balance text-[2.9rem] font-bold leading-[0.92] text-white sm:text-6xl lg:text-7xl xl:text-[5.6rem]">
+              Haz que tu techo <span className="text-cyan">trabaje</span> para bajar tu factura.
+            </h1>
+            <p className="mt-6 max-w-2xl text-balance text-base leading-8 text-white/80 sm:text-lg lg:text-[1.1rem]">
+              Suministro e instalación de paneles solares para hogares y negocios que quieren una solución moderna, visualmente confiable y pensada para ahorrar durante años.
             </p>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {['Instalación profesional', 'Atención rápida', 'Acompañamiento claro', 'Enfoque en ahorro duradero'].map((item) => (
-                <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.035] px-4 py-3 text-sm text-white/82">
-                  {item}
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-h-12 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-[#04112d] transition hover:scale-[1.02]"
+              >
+                Solicitar evaluación
+              </a>
+              <a
+                href="#propuesta"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/8 px-6 text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/35"
+              >
+                Ver propuesta visual
+                <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </Reveal>
+
+          <Reveal className="xl:justify-self-end xl:self-end">
+            <div className="glass-panel max-w-[30rem] rounded-[2rem] p-5 sm:p-6">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Lo que más vende</p>
+                  <h2 className="mt-3 text-2xl font-bold text-white sm:text-[2rem]">Paneles solares reales, vistos desde el primer scroll.</h2>
                 </div>
-              ))}
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/12 bg-white/10 text-white">
+                  <Play className="h-5 w-5 fill-current" />
+                </div>
+              </div>
+              <p className="mt-4 text-sm leading-7 text-white/75">
+                Esta landing se replantea para que el video sea protagonista: tomas aéreas, techos con paneles y una percepción más fuerte de marca desde el primer segundo.
+              </p>
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                {['Hero full screen', 'Visual premium', 'Enfoque en ahorro', 'Marca más sólida'].map((item) => (
+                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm text-white/86">
+                    {item}
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
@@ -235,30 +163,28 @@ function TrustRibbon() {
   );
 }
 
-function BenefitsSection() {
+function OverviewSection() {
   return (
-    <section id="beneficios" className="py-14 lg:py-20">
+    <section id="beneficios" className="relative py-14 lg:py-20">
       <div className="section-shell">
         <Reveal className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Beneficios principales</span>
-          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-5xl">
-            Tu factura no tiene que seguir marcando el ritmo.
-          </h2>
-          <p className="mt-5 text-base leading-8 text-white/74 sm:text-lg">
-            La energía solar ayuda a transformar un gasto recurrente en una inversión estratégica. El mensaje central de la marca debe sentirse así: menos presión mensual, más control y más tranquilidad a largo plazo.
+          <span className="section-kicker">Beneficios principales</span>
+          <h2 className="section-title mt-4 max-w-4xl">Una web que vende mejor cuando transmite ahorro, confianza y ejecución real.</h2>
+          <p className="section-copy mt-5 max-w-3xl">
+            El centro del mensaje es simple: la energía solar no se ve como un gasto adicional, sino como una decisión más inteligente para controlar mejor el costo energético y proyectar una operación más fuerte a largo plazo.
           </p>
         </Reveal>
 
-        <Stagger className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          {benefits.map((benefit) => {
-            const Icon = benefit.icon;
+        <Stagger className="mt-10 grid gap-4 lg:grid-cols-3">
+          {highlights.map((item) => {
+            const Icon = item.icon;
             return (
-              <Reveal key={benefit.title} className="rounded-[2rem] border border-white/10 bg-white/[0.035] p-6 shadow-glow">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/6 text-cyan">
+              <Reveal key={item.title} className="panel-card p-6">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/8 text-cyan">
                   <Icon className="h-5 w-5" />
                 </div>
-                <h3 className="mt-5 text-xl font-bold text-white">{benefit.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/74">{benefit.copy}</p>
+                <h3 className="mt-5 text-xl font-bold text-white">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-white/72">{item.copy}</p>
               </Reveal>
             );
           })}
@@ -268,51 +194,179 @@ function BenefitsSection() {
   );
 }
 
-function ProcessSection() {
+function SolutionsSection() {
   return (
-    <section id="proceso" className="py-14 lg:py-20">
-      <div className="section-shell grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-        <Reveal className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 lg:p-8">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Cómo funciona</span>
-          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
-            Un proceso claro, rápido y profesional.
-          </h2>
-          <p className="mt-4 max-w-xl text-base leading-8 text-white/74">
-            La experiencia de compra también debe sentirse premium. Por eso la landing se apoya en un flujo simple, entendible y visualmente sólido.
-          </p>
-          <div className="mt-8 space-y-4">
-            {processSteps.map((step, index) => (
-              <div key={step.title} className="rounded-[1.5rem] border border-white/10 bg-ink/40 p-5">
-                <div className="text-sm font-semibold uppercase tracking-[0.25em] text-ember">Paso {index + 1}</div>
-                <div className="mt-2 text-xl font-bold text-white">{step.title}</div>
-                <p className="mt-2 text-sm leading-7 text-white/72">{step.description}</p>
-              </div>
-            ))}
+    <section className="pb-14 lg:pb-20">
+      <div className="section-shell grid gap-5 xl:grid-cols-[0.92fr_1.08fr]">
+        <Reveal className="panel-card flex flex-col justify-between p-6 sm:p-7">
+          <div>
+            <span className="section-kicker">Más claridad comercial</span>
+            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">La marca debe dejar claro que puede adaptarse tanto al hogar como al negocio.</h2>
+            <p className="mt-5 text-base leading-8 text-white/74">
+              La narrativa visual se apoya en soluciones reales y en un lenguaje mucho más vendedor: ahorro, desempeño, respaldo técnico y una propuesta clara de valor para distintos tipos de cliente.
+            </p>
           </div>
-        </Reveal>
 
-        <Reveal className="grid gap-4 sm:grid-cols-2">
-          <VideoCard src="/videos/gallery/install-team.mp4" title="Instalación en sitio" copy="Prueba visual directa de ejecución y equipo humano." />
-          <VideoCard src="/videos/gallery/equipment-move.mp4" title="Logística real" copy="El proyecto no es teoría: es trabajo real en campo." />
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-glow sm:col-span-2">
-            <div className="relative aspect-[16/10] min-h-[290px] overflow-hidden">
-              <Image
-                src="/images/gallery/residential-roof.jpg"
-                alt="Techo residencial con paneles solares"
-                fill
-                className="object-cover object-center"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-5">
-                <div className="text-sm font-semibold text-white">Residencial o comercial</div>
-                <p className="mt-2 max-w-xl text-sm leading-6 text-white/74">
-                  La estructura visual del sitio deja claro que la propuesta puede adaptarse tanto a hogares como a negocios.
-                </p>
-              </div>
+          <div className="mt-8 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
+              <House className="h-5 w-5 text-cyan" />
+              <p className="mt-3 text-lg font-semibold text-white">Residencial</p>
+              <p className="mt-2 text-sm leading-7 text-white/72">Ideal para bajar el peso de la factura y convertir el techo en una inversión útil.</p>
+            </div>
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
+              <Building2 className="h-5 w-5 text-cyan" />
+              <p className="mt-3 text-lg font-semibold text-white">Comercial</p>
+              <p className="mt-2 text-sm leading-7 text-white/72">Pensado para negocios que necesitan escala, control y una propuesta mejor estructurada.</p>
             </div>
           </div>
         </Reveal>
+
+        <div className="grid gap-4 md:grid-cols-2">
+          {solutions.map((solution) => (
+            <Reveal key={solution.title} className="video-card relative min-h-[420px] overflow-hidden rounded-[2rem]">
+              <Image
+                src={solution.image}
+                alt={solution.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 30vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020817]/95 via-[#020817]/38 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">{solution.title.includes('residenciales') ? 'Hogar' : 'Negocio'}</p>
+                <h3 className="mt-3 text-2xl font-bold text-white">{solution.title}</h3>
+                <p className="mt-3 max-w-md text-sm leading-7 text-white/78">{solution.copy}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProposalSection() {
+  return (
+    <section id="propuesta" className="py-14 lg:py-20">
+      <div className="section-shell">
+        <Reveal className="max-w-3xl">
+          <span className="section-kicker">Propuesta y presentación</span>
+          <h2 className="section-title mt-4">También se aprovecha el material del PDF para reforzar seriedad y metodología.</h2>
+          <p className="section-copy mt-5 max-w-3xl">
+            Como la marca no tiene demasiadas imágenes adicionales, esta sección convierte parte de la presentación comercial en una muestra visual útil: análisis, cobertura estimada, retorno y condiciones generales presentadas de forma clara.
+          </p>
+        </Reveal>
+
+        <div className="mt-10 grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
+          <Reveal className="panel-card overflow-hidden p-6 sm:p-7">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/6 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/86">
+                <FileCheck2 className="h-4 w-4 text-cyan" />
+                Caso referencial
+              </span>
+              <span className="rounded-full border border-cyan/20 bg-cyan/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan">
+                Proyecto La Marquesa
+              </span>
+            </div>
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
+              {proposalStats.map((stat) => (
+                <div key={stat.label} className="rounded-[1.4rem] border border-white/10 bg-white/[0.05] p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/48">{stat.label}</p>
+                  <p className="mt-2 text-2xl font-bold text-white">{stat.value}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-5">
+              <div className="grid gap-4 sm:grid-cols-3">
+                <div>
+                  <BarChart3 className="h-5 w-5 text-cyan" />
+                  <p className="mt-3 font-semibold text-white">Análisis del consumo</p>
+                  <p className="mt-2 text-sm leading-7 text-white/70">La propuesta muestra cómo se calcula la cobertura y la producción esperada del sistema.</p>
+                </div>
+                <div>
+                  <ChartNoAxesCombined className="h-5 w-5 text-cyan" />
+                  <p className="mt-3 font-semibold text-white">Retorno de inversión</p>
+                  <p className="mt-2 text-sm leading-7 text-white/70">Se hace visible el ROI estimado para ayudar al cliente a entender mejor la decisión.</p>
+                </div>
+                <div>
+                  <BadgeCheck className="h-5 w-5 text-cyan" />
+                  <p className="mt-3 font-semibold text-white">Garantías y alcance</p>
+                  <p className="mt-2 text-sm leading-7 text-white/70">También se refuerza la percepción de confianza mostrando condiciones, garantías y servicios incluidos.</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-4 lg:grid-cols-3">
+            {['/images/proposal/proposal-page-1.png', '/images/proposal/proposal-page-2.png', '/images/proposal/proposal-page-3.png'].map((src, index) => (
+              <Reveal key={src} className="panel-card overflow-hidden p-3">
+                <div className="relative aspect-[5/6] overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#081020]">
+                  <Image
+                    src={src}
+                    alt={`Vista previa de la propuesta comercial Solarled ${index + 1}`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 1024px) 100vw, 22vw"
+                  />
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ProcessSection() {
+  return (
+    <section id="proceso" className="py-14 lg:py-20">
+      <div className="section-shell">
+        <div className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
+          <Reveal className="panel-card relative min-h-[420px] overflow-hidden rounded-[2rem] p-0">
+            <video
+              className="absolute inset-0 h-full w-full object-cover"
+              src="/videos/gallery/rooftop-vertical.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="auto"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020817]/92 via-[#020817]/42 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+              <span className="section-kicker">Video como fondo</span>
+              <h2 className="mt-4 max-w-xl text-balance text-3xl font-bold text-white sm:text-4xl">La idea es que la web se sienta viva, como si estuvieras sobrevolando techos con paneles solares.</h2>
+              <p className="mt-4 max-w-xl text-sm leading-8 text-white/76">
+                Por eso aquí el video no funciona como una simple miniatura: entra como parte del ambiente visual principal y refuerza lo que la cliente sí quiere mostrar.
+              </p>
+            </div>
+          </Reveal>
+
+          <div>
+            <Reveal className="max-w-3xl">
+              <span className="section-kicker">Proceso de trabajo</span>
+              <h2 className="section-title mt-4">La conversación comercial se vuelve más clara cuando el proceso también se ve claro.</h2>
+              <p className="section-copy mt-5 max-w-2xl">
+                Además del impacto visual, la estructura del sitio presenta el camino lógico del cliente: entender la oportunidad, recibir una propuesta, ejecutar la instalación y acompañar el resultado.
+              </p>
+            </Reveal>
+
+            <Stagger className="mt-8 grid gap-4 sm:grid-cols-2">
+              {processSteps.map((step, index) => (
+                <Reveal key={step.title} className="panel-card p-5">
+                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/6 text-sm font-bold text-white">
+                    {index + 1}
+                  </div>
+                  <h3 className="mt-4 text-xl font-bold text-white">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-white/72">{step.description}</p>
+                </Reveal>
+              ))}
+            </Stagger>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -321,25 +375,39 @@ function ProcessSection() {
 function ServicesSection() {
   return (
     <section id="servicios" className="py-14 lg:py-20">
-      <div className="section-shell">
-        <Reveal className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Servicios</span>
-          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-5xl">
-            Lo que la marca ofrece debe verse tan claro como contundente.
-          </h2>
+      <div className="section-shell grid gap-5 xl:grid-cols-[0.88fr_1.12fr] xl:items-start">
+        <Reveal className="panel-card p-6 sm:p-7">
+          <span className="section-kicker">Servicios</span>
+          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">Una propuesta más fuerte también necesita explicar mejor lo que incluye.</h2>
+          <p className="mt-5 text-base leading-8 text-white/74">
+            El contenido se reorganiza para presentar la oferta con mayor claridad: suministro, instalación, evaluación técnica, acompañamiento y soluciones orientadas a bajar el costo energético de manera sostenida.
+          </p>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
+              <SunMedium className="h-5 w-5 text-cyan" />
+              <p className="mt-3 font-semibold text-white">Ahorro</p>
+              <p className="mt-2 text-sm leading-7 text-white/70">Orientado a reducir la presión de la factura con una solución bien estructurada.</p>
+            </div>
+            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
+              <BatteryCharging className="h-5 w-5 text-cyan" />
+              <p className="mt-3 font-semibold text-white">Tecnología</p>
+              <p className="mt-2 text-sm leading-7 text-white/70">Equipos, componentes y un enfoque técnico que refuerza la seriedad del proyecto.</p>
+            </div>
+          </div>
         </Reveal>
-        <Stagger className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {services.map((service, index) => (
-            <Reveal key={service} className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.03] p-6 shadow-glow">
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-sm font-bold text-ember">
-                  0{index + 1}
-                </span>
-                <h3 className="text-lg font-semibold text-white">{service}</h3>
+
+        <Stagger className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {services.map((service) => (
+            <Reveal key={service} className="panel-card flex min-h-[170px] items-start gap-4 p-5">
+              <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/8 text-cyan">
+                <BadgeCheck className="h-4 w-4" />
               </div>
-              <p className="mt-4 text-sm leading-7 text-white/72">
-                Bloque construido con peso visual para reforzar la propuesta de valor sin recurrir a elementos genéricos o vacíos.
-              </p>
+              <div>
+                <h3 className="text-lg font-semibold text-white">{service}</h3>
+                <p className="mt-2 text-sm leading-7 text-white/70">
+                  Presentado dentro de una estructura más clara, más premium y más orientada a conversión.
+                </p>
+              </div>
             </Reveal>
           ))}
         </Stagger>
@@ -348,117 +416,18 @@ function ServicesSection() {
   );
 }
 
-function GallerySection() {
-  return (
-    <section id="galeria" className="py-14 lg:py-20">
-      <div className="section-shell">
-        <Reveal className="max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Galería / evidencia visual</span>
-          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-5xl">
-            Curaduría visual pensada para vender confianza, no para llenar espacio.
-          </h2>
-          <p className="mt-4 text-base leading-8 text-white/74">
-            El material real se ordena con intención editorial para que la marca se perciba seria, actual y bien ejecutada.
-          </p>
-        </Reveal>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {gallery.map((item, index) => (
-            <Reveal
-              key={`${item.title}-${index}`}
-              className={`group overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-glow ${index === 0 ? 'md:col-span-2' : ''}`}
-            >
-              <div className={`relative overflow-hidden ${index === 0 ? 'aspect-[16/10] md:aspect-[18/10]' : 'aspect-[4/5] md:aspect-[4/3]'}`}>
-                {item.type === 'image' ? (
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    className="object-cover transition duration-700 group-hover:scale-[1.035]"
-                    sizes={index === 0 ? '(max-width: 1280px) 100vw, 66vw' : '(max-width: 1280px) 100vw, 33vw'}
-                  />
-                ) : (
-                  <video
-                    className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-[1.03]"
-                    src={item.src}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                  />
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/18 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                  <div className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan/95">{item.title}</div>
-                  <p className="mt-3 max-w-md text-sm leading-7 text-white/78">{item.copy}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function AuthoritySection() {
-  return (
-    <section className="py-14 lg:py-20">
-      <div className="section-shell">
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <Reveal className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Confianza / autoridad</span>
-            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
-              Energía limpia con una presencia corporativa fuerte y cercana.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/74">
-              Esta landing se construyó para convencer a alguien que sí puede invertir: menos promesa vacía, más claridad, más evidencia visual y una sensación de marca que inspire seguridad desde el primer vistazo.
-            </p>
-            <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <Stat label="Cobertura" value="Colón a Chiriquí" icon={MapPin} />
-              <Stat label="Contacto directo" value="WhatsApp y evaluación" icon={Phone} />
-              <Stat label="Enfoque" value="Ahorro de largo plazo" icon={SunMedium} />
-              <Stat label="Aplicación" value="Hogar y negocio" icon={House} />
-            </div>
-          </Reveal>
-          <Reveal className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0c1d61] to-[#060f34] p-6 sm:p-8">
-            <div className="text-xs font-semibold uppercase tracking-[0.28em] text-ember">Cierre racional + emocional</div>
-            <p className="mt-6 text-3xl font-bold leading-tight text-white sm:text-4xl">
-              Haz que tu próxima factura se sienta más liviana.
-            </p>
-            <p className="mt-4 text-base leading-8 text-white/74">
-              Una solución solar bien instalada puede ayudarte a bajar la presión del gasto eléctrico y a tomar una decisión más inteligente para tu propiedad o negocio.
-            </p>
-            <a
-              href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-8 inline-flex min-h-12 items-center justify-center rounded-full bg-ember px-6 text-sm font-semibold text-ink transition hover:scale-[1.01]"
-            >
-              Quiero mi evaluación
-            </a>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function FAQSection() {
   return (
     <section id="faq" className="py-14 lg:py-20">
-      <div className="section-shell grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
-        <Reveal>
-          <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Preguntas frecuentes</span>
-          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
-            Dudas habituales antes de dar el paso.
-          </h2>
-          <p className="mt-4 max-w-lg text-base leading-8 text-white/74">
-            Esta sección reduce fricción comercial y ayuda a que más personas pasen de la curiosidad a la conversación directa.
+      <div className="section-shell grid gap-8 xl:grid-cols-[0.82fr_1.18fr]">
+        <Reveal className="max-w-xl">
+          <span className="section-kicker">Preguntas frecuentes</span>
+          <h2 className="section-title mt-4">Resolver dudas también ayuda a vender mejor.</h2>
+          <p className="section-copy mt-5">
+            Esta parte se mantiene, pero con un entorno visual más sólido y coherente con el rediseño general del sitio.
           </p>
         </Reveal>
-        <div className="space-y-4">
+        <div className="grid gap-4">
           {faqs.map((faq) => (
             <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
           ))}
@@ -472,24 +441,66 @@ function ContactSection() {
   return (
     <section id="contacto" className="py-14 lg:py-20">
       <div className="section-shell">
-        <div className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Reveal className="rounded-[2rem] border border-white/10 bg-gradient-to-b from-[#0c1d61] to-[#060f34] p-6 sm:p-8">
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Contacto / cotización</span>
-            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">
-              Solicita una evaluación y empieza a bajar el peso de tu factura.
-            </h2>
-            <p className="mt-4 text-base leading-8 text-white/74">
-              El formulario está pensado para convertir mejor: recoge lo justo para iniciar una conversación real por WhatsApp o correo sin fricción innecesaria.
+        <div className="grid gap-5 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
+          <Reveal className="panel-card p-6 sm:p-7 lg:p-8">
+            <span className="section-kicker">Contacto</span>
+            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">Solicita una evaluación y empieza a ver cómo podría bajar tu factura.</h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-white/74">
+              El formulario sigue enviando la información por WhatsApp para mantener un flujo simple y rápido. También se mantiene la opción de escribir por correo.
             </p>
-            <div className="mt-8 space-y-5 text-sm leading-7 text-white/78">
-              <InfoLine icon={Phone} label="Teléfono" value={siteConfig.phone} />
-              <InfoLine icon={Mail} label="Correo" value={siteConfig.email} />
-              <InfoLine icon={MapPin} label="Dirección" value={siteConfig.address} />
+
+            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+              <InfoPill icon={<Phone className="h-4 w-4" />} text={siteConfig.phone} />
+              <InfoPill icon={<Mail className="h-4 w-4" />} text={siteConfig.email} />
+              <InfoPill icon={<MapPin className="h-4 w-4" />} text="Costa del Este, Panamá" />
+            </div>
+
+            <div className="mt-8">
+              <ContactForm />
             </div>
           </Reveal>
-          <Reveal className="rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 sm:p-8">
-            <ContactForm />
-          </Reveal>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            <Reveal className="video-card relative min-h-[330px] overflow-hidden rounded-[2rem]">
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src="/videos/hero/hero-vertical.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020817]/94 via-[#020817]/38 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan">Video 01</p>
+                <h3 className="mt-3 text-2xl font-bold text-white">Impacto inmediato al abrir la web</h3>
+                <p className="mt-3 text-sm leading-7 text-white/75">
+                  Un bloque de video dominante refuerza la sensación de escala y hace que el producto se vea más deseable.
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal className="video-card relative min-h-[330px] overflow-hidden rounded-[2rem]">
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src="/videos/gallery/rooftop-vertical.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#020817]/94 via-[#020817]/38 to-transparent" />
+              <div className="absolute inset-x-0 bottom-0 p-6">
+                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan">Video 02</p>
+                <h3 className="mt-3 text-2xl font-bold text-white">Paneles solares por todos lados, pero con orden visual</h3>
+                <p className="mt-3 text-sm leading-7 text-white/75">
+                  Esta segunda pieza acompaña el cierre de conversión y mantiene vivo el lenguaje visual basado en techos y paneles reales.
+                </p>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
     </section>
@@ -498,56 +509,58 @@ function ContactSection() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/10 py-8">
-      <div className="section-shell flex flex-col gap-3 text-sm text-white/58 sm:flex-row sm:items-center sm:justify-between">
-        <p>{siteConfig.brand} · {siteConfig.coverage}</p>
-        <p>{siteConfig.email} · WhatsApp {siteConfig.whatsappDisplay}</p>
+    <footer className="border-t border-white/10 bg-[#020817]">
+      <div className="section-shell py-8 sm:py-10 lg:py-12">
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div>
+            <Image
+              src="/images/brand/solarled-logo-clean.png"
+              alt="Solarled"
+              width={950}
+              height={285}
+              className="h-auto w-[210px] sm:w-[260px] lg:w-[320px]"
+            />
+            <p className="mt-5 max-w-xl text-sm leading-8 text-white/66">
+              Soluciones de energía solar para hogares y negocios en Panamá, con una propuesta más fuerte, más visual y mejor enfocada en ahorro, confianza y conversión.
+            </p>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:justify-self-end">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Contacto</p>
+              <div className="mt-4 space-y-3 text-sm text-white/75">
+                <p>{siteConfig.phone}</p>
+                <p>{siteConfig.whatsappDisplay}</p>
+                <p className="break-all">{siteConfig.email}</p>
+              </div>
+            </div>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Ubicación</p>
+              <div className="mt-4 space-y-3 text-sm text-white/75">
+                <p>{siteConfig.address}</p>
+                <a
+                  href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-white transition hover:text-cyan"
+                >
+                  Escribir por WhatsApp
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );
 }
 
-function Stat({
-  label,
-  value,
-  icon: Icon
-}: {
-  label: string;
-  value: string;
-  icon: typeof MapPin;
-}) {
+function InfoPill({ icon, text }: { icon: ReactNode; text: string }) {
   return (
-    <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-5">
-      <Icon className="h-5 w-5 text-ember" />
-      <div className="mt-4 text-sm uppercase tracking-[0.24em] text-white/48">{label}</div>
-      <div className="mt-2 text-lg font-semibold text-white">{value}</div>
-    </div>
-  );
-}
-
-function InfoLine({ icon: Icon, label, value }: { icon: typeof Phone; label: string; value: string }) {
-  return (
-    <div className="flex gap-3">
-      <Icon className="mt-1 h-4 w-4 shrink-0 text-ember" />
-      <div>
-        <div className="text-xs uppercase tracking-[0.24em] text-white/45">{label}</div>
-        <div className="mt-1 text-white/88">{value}</div>
-      </div>
-    </div>
-  );
-}
-
-function VideoCard({ src, title, copy }: { src: string; title: string; copy: string }) {
-  return (
-    <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-glow">
-      <div className="relative aspect-[4/5] min-h-[320px] overflow-hidden sm:aspect-[4/3]">
-        <video className="absolute inset-0 h-full w-full object-cover" src={src} autoPlay muted loop playsInline preload="metadata" />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/15 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 p-5">
-          <div className="text-sm font-semibold text-white">{title}</div>
-          <p className="mt-2 text-sm leading-6 text-white/74">{copy}</p>
-        </div>
-      </div>
+    <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white/82">
+      <span className="text-cyan">{icon}</span>
+      <span className="truncate">{text}</span>
     </div>
   );
 }
