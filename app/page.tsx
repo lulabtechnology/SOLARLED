@@ -1,23 +1,6 @@
 import Image from 'next/image';
 import type { ReactNode } from 'react';
-import {
-  ArrowRight,
-  BadgeCheck,
-  BarChart3,
-  BatteryCharging,
-  Building2,
-  ChartNoAxesCombined,
-  FileCheck2,
-  Gauge,
-  House,
-  Mail,
-  MapPin,
-  Phone,
-  ShieldCheck,
-  SunMedium,
-  Wallet,
-  Zap
-} from 'lucide-react';
+import { ArrowRight, Award, BadgeCheck, BatteryCharging, Building2, CheckCircle2, FileCheck2, Gauge, House, Mail, MapPin, Phone, ShieldCheck, SunMedium, Zap } from 'lucide-react';
 import { ContactForm } from '@/components/contact-form';
 import { FAQItem } from '@/components/faq';
 import { Reveal, Stagger } from '@/components/motion';
@@ -25,621 +8,72 @@ import { Navbar } from '@/components/navbar';
 import { WhatsAppFloat } from '@/components/whatsapp-float';
 import { faqs, processSteps, siteConfig } from '@/lib/site';
 
+const heroFacts = ['Paneles solares', 'Instalación profesional', 'Equipos certificados'];
 const highlights = [
-  {
-    title: 'Ahorro desde el primer objetivo',
-    copy: 'Cada proyecto se enfoca en reducir el costo energético con una solución clara, bien calculada y pensada para rendir en el tiempo.',
-    icon: Wallet
-  },
-  {
-    title: 'Residencial y comercial',
-    copy: 'Solar LED atiende hogares, negocios y propiedades que buscan una instalación confiable, ordenada y visualmente profesional.',
-    icon: Building2
-  },
-  {
-    title: 'Respaldo y confianza',
-    copy: 'No se trata solo de vender paneles solares, sino de acompañar al cliente con criterio técnico y atención real.',
-    icon: ShieldCheck
-  }
+  { title: 'Ahorro energético real', copy: 'Soluciones diseñadas para reducir la factura eléctrica con una propuesta clara, medible y adaptada al consumo de cada cliente.', icon: SunMedium },
+  { title: 'Calidad respaldada', copy: 'Se priorizan equipos con certificaciones, garantías y fichas técnicas que ayudan a tomar una decisión segura.', icon: Award },
+  { title: 'Instalación cuidada', copy: 'Cada montaje se trabaja con orden, criterio técnico y enfoque en una experiencia profesional de principio a fin.', icon: ShieldCheck }
 ];
-
-const solutions = [
-  {
-    title: 'Soluciones residenciales',
-    copy: 'Para familias que quieren bajar su factura eléctrica con una instalación limpia, moderna y adaptada a su propiedad.',
-    image: '/images/gallery/residential-roof.jpg',
-    alt: 'Techo residencial con paneles solares'
-  },
-  {
-    title: 'Soluciones comerciales',
-    copy: 'Para negocios, edificios y proyectos que requieren una propuesta de mayor escala con enfoque técnico y financiero.',
-    image: '/images/gallery/rooftop-skyline.jpg',
-    alt: 'Sistema de paneles solares en techo comercial'
-  }
+const certifications = [
+  { title: 'IEC 61215 / IEC 61730', copy: 'Referencias internacionales para desempeño, seguridad y confiabilidad de módulos fotovoltaicos.' },
+  { title: 'CE / estándares eléctricos', copy: 'Equipos alineados a exigencias de seguridad eléctrica y fabricación responsable, según ficha técnica.' },
+  { title: 'ISO 9001', copy: 'Respaldo de procesos de calidad en fabricantes y proveedores seleccionados para cada proyecto.' },
+  { title: 'Garantías de producto', copy: 'Garantías de equipos y desempeño que refuerzan la durabilidad de la inversión solar.' }
 ];
-
-const proposalStats = [
-  { label: 'Potencia propuesta', value: '37.2 kWp' },
-  { label: 'Cobertura estimada', value: '124%' },
-  { label: 'Retorno estimado', value: '23 meses' },
-  { label: 'Ganancia proyectada', value: '1443%' }
-];
-
-const serviceCards = [
-  {
-    title: 'Suministro de paneles solares',
-    copy: 'Equipos y componentes para proyectos residenciales y comerciales con enfoque en eficiencia y durabilidad.',
-    icon: SunMedium
-  },
-  {
-    title: 'Instalación profesional',
-    copy: 'Montaje e implementación del sistema con orden, seguridad y una ejecución alineada al proyecto.',
-    icon: BadgeCheck
-  },
-  {
-    title: 'Evaluación técnica',
-    copy: 'Revisión del consumo, la propiedad y la viabilidad del sistema para proponer una solución más acertada.',
-    icon: Gauge
-  },
-  {
-    title: 'Asesoría para hogares',
-    copy: 'Orientación para familias que desean transformar su techo en una herramienta de ahorro energético.',
-    icon: House
-  },
-  {
-    title: 'Asesoría para negocios',
-    copy: 'Acompañamiento para comercios y empresas que buscan optimizar costos y fortalecer su operación.',
-    icon: Building2
-  },
-  {
-    title: 'Monitoreo y respaldo',
-    copy: 'Seguimiento y acompañamiento para que el cliente tenga claridad sobre el desempeño de su inversión.',
-    icon: BatteryCharging
-  }
+const services = [
+  { title: 'Sistemas residenciales', copy: 'Para hogares que buscan transformar su techo en una inversión de ahorro energético.', icon: House },
+  { title: 'Sistemas comerciales', copy: 'Para empresas, locales y edificios con consumo alto que desean optimizar costos operativos.', icon: Building2 },
+  { title: 'Evaluación del consumo', copy: 'Revisión de factura, ubicación y viabilidad para dimensionar mejor la solución.', icon: Gauge },
+  { title: 'Suministro de equipos', copy: 'Paneles, inversores y componentes seleccionados por rendimiento, respaldo y compatibilidad.', icon: BatteryCharging },
+  { title: 'Instalación y montaje', copy: 'Ejecución profesional para que el sistema se vea limpio, seguro y correctamente integrado.', icon: BadgeCheck },
+  { title: 'Acompañamiento', copy: 'Orientación antes, durante y después de la instalación para que el cliente tenga claridad.', icon: CheckCircle2 }
 ];
 
 export default function HomePage() {
-  return (
-    <>
-      <Navbar />
-      <main id="inicio" className="overflow-x-hidden">
-        <HeroSection />
-        <OverviewSection />
-        <SolutionsSection />
-        <ProposalSection />
-        <ProcessSection />
-        <ServicesSection />
-        <FAQSection />
-        <ContactSection />
-        <FinalCTASection />
-      </main>
-      <Footer />
-      <WhatsAppFloat />
-    </>
-  );
+  return <><Navbar /><main id="inicio" className="overflow-x-hidden"><HeroSection /><CertificationSection /><FullVisualSection id="beneficios" eyebrow="Energía que se ve y se siente" title="Paneles solares como protagonistas, sin recuadros ni cortes innecesarios." copy="La nueva presentación visual de Solarled usa fotos y videos como fondos amplios para que el visitante vea el alcance real de las instalaciones y conecte rápido con la calidad del servicio." image="/images/gallery/residential-roof.jpg" alt="Techo residencial con paneles solares" align="left" /><OverviewSection /><FullVisualSection id="proceso" eyebrow="Proceso profesional" title="Cada proyecto se evalúa, se diseña y se instala con criterio técnico." copy="Desde la primera conversación hasta el acompañamiento final, Solarled busca que el cliente entienda qué se instalará, por qué conviene y cómo ese sistema puede ayudarle a ahorrar." video="/videos/gallery/equipment-move.mp4" align="right" /><ServicesSection /><ProcessSection /><FAQSection /><ContactSection /><FinalCTASection /></main><Footer /><WhatsAppFloat /></>;
 }
 
 function HeroSection() {
-  return (
-    <section className="relative flex min-h-[100svh] items-end overflow-hidden bg-[#071440]">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src="/videos/gallery/installation-montage.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,9,31,0.28)_0%,rgba(4,9,31,0.44)_28%,rgba(4,9,31,0.82)_78%,rgba(4,9,31,0.95)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(64,92,214,0.28),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(17,33,93,0.22),transparent_30%)]" />
+  return <section className="relative min-h-[100svh] overflow-hidden bg-deep text-white"><video className="absolute inset-0 h-full w-full scale-110 object-cover opacity-55 blur-md" src="/videos/hero/video-1-hero.mp4" poster="/images/hero/video-1-poster.jpg" autoPlay muted loop playsInline preload="auto" aria-hidden="true" /><video className="absolute inset-0 h-full w-full object-contain" src="/videos/hero/video-1-hero.mp4" poster="/images/hero/video-1-poster.jpg" autoPlay muted loop playsInline preload="auto" aria-label="Instalación Solarled sobre techo con paneles solares" /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,32,26,0.96)_0%,rgba(5,32,26,0.72)_42%,rgba(5,32,26,0.22)_100%)]" /><div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,32,26,0.16)_0%,rgba(5,32,26,0.2)_40%,rgba(5,32,26,0.95)_100%)]" /><div className="section-shell relative z-10 flex min-h-[100svh] items-end pb-10 pt-32 sm:pb-14 lg:pb-16"><div className="max-w-5xl"><Reveal><span className="inline-flex items-center gap-2 rounded-full border border-white/[0.18] bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.3em] text-white backdrop-blur-md"><Zap className="h-3.5 w-3.5 text-leaf" />Energía solar en Panamá</span></Reveal><h1 className="mt-6 max-w-5xl text-balance text-[3rem] font-bold leading-[0.9] tracking-[-0.06em] text-white sm:text-6xl lg:text-7xl xl:text-[6.3rem]"><span className="hero-word block">Ahorro solar</span><span className="hero-word hero-word-delay-1 block text-leaf">con respaldo</span><span className="hero-word hero-word-delay-2 block">certificado.</span></h1><Reveal className="mt-6 max-w-2xl"><p className="text-base leading-8 text-white/[0.86] sm:text-lg lg:text-xl">Solarled diseña, suministra e instala sistemas fotovoltaicos para hogares y negocios que buscan bajar su factura eléctrica con equipos de calidad y una ejecución profesional.</p></Reveal><Reveal className="mt-8 flex flex-col gap-3 sm:flex-row"><a href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-full bg-leaf px-7 text-sm font-bold text-deep shadow-[0_18px_40px_rgba(141,198,63,0.35)] transition hover:scale-[1.02]">Solicitar evaluación</a><a href="#certificaciones" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/[0.24] bg-white/[0.12] px-7 text-sm font-bold text-white backdrop-blur-md transition hover:border-white/[0.45]">Ver certificaciones<ArrowRight className="h-4 w-4" /></a></Reveal><Stagger className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-3">{heroFacts.map((item) => <Reveal key={item} className="rounded-3xl border border-white/[0.14] bg-white/10 px-4 py-3 text-sm font-semibold text-white/90 backdrop-blur-md">{item}</Reveal>)}</Stagger></div></div></section>;
+}
 
-      <div className="section-shell relative z-10 flex w-full items-end pb-8 pt-28 sm:pb-10 lg:pb-14">
-        <div className="grid w-full gap-8 xl:grid-cols-[1.08fr_0.92fr] xl:items-end">
-          <Reveal className="max-w-4xl">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/90 backdrop-blur-md">
-              <Zap className="h-3.5 w-3.5 text-cyan" />
-              Energía solar en Panamá
-            </span>
-            <h1 className="mt-6 max-w-4xl text-balance text-[2.9rem] font-bold leading-[0.92] text-white sm:text-6xl lg:text-7xl xl:text-[5.45rem]">
-              Convierte tu techo en <span className="text-cyan">ahorro real</span> con energía solar.
-            </h1>
-            <p className="mt-6 max-w-2xl text-balance text-base leading-8 text-white/80 sm:text-lg lg:text-[1.1rem]">
-              Solar LED diseña, suministra e instala sistemas de paneles solares para hogares y negocios que buscan reducir su factura eléctrica con una solución confiable, moderna y bien ejecutada.
-            </p>
+function CertificationSection() {
+  return <section id="certificaciones" className="relative bg-ivory py-16 text-deep lg:py-24"><div className="section-shell"><div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-end"><Reveal><span className="section-kicker">Certificaciones de productos</span><h2 className="section-title mt-4 max-w-3xl">La calidad de un sistema solar se demuestra con respaldo técnico.</h2><p className="section-copy mt-5 max-w-2xl">Para Solarled, no basta con instalar paneles: es importante trabajar con productos respaldados por certificaciones, estándares de seguridad, garantías y documentación técnica verificable.</p></Reveal><Stagger className="grid gap-4 sm:grid-cols-2">{certifications.map((item) => <Reveal key={item.title} className="panel-card p-5"><div className="flex items-start gap-4"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-leaf/[0.14] text-leaf"><FileCheck2 className="h-5 w-5" /></div><div><h3 className="text-lg font-bold text-deep">{item.title}</h3><p className="mt-2 text-sm leading-7 text-steel">{item.copy}</p></div></div></Reveal>)}</Stagger></div></div></section>;
+}
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-12 items-center justify-center rounded-full bg-cyan px-6 text-sm font-semibold text-white transition hover:scale-[1.02]"
-              >
-                Solicitar evaluación
-              </a>
-              <a
-                href="#propuesta"
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/35"
-              >
-                Ver propuesta
-                <ArrowRight className="h-4 w-4" />
-              </a>
-            </div>
-          </Reveal>
-
-          <Reveal className="xl:justify-self-end xl:self-end">
-            <div className="glass-panel max-w-[30rem] rounded-[2rem] p-5 sm:p-6">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Solar LED</p>
-                  <h2 className="mt-3 text-2xl font-bold text-white sm:text-[2rem]">Soluciones solares bien pensadas para cada tipo de proyecto.</h2>
-                </div>
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-white/12 bg-white/10 text-white">
-                  <Gauge className="h-5 w-5" />
-                </div>
-              </div>
-              <p className="mt-4 text-sm leading-7 text-white/75">
-                Desde la evaluación inicial hasta la instalación, el objetivo es ofrecer una experiencia clara, profesional y enfocada en resultados medibles.
-              </p>
-              <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                {['Ahorro energético', 'Atención en Panamá', 'Instalación profesional', 'Propuesta a medida'].map((item) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm text-white/85">
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </div>
-    </section>
-  );
+function FullVisualSection({ id, eyebrow, title, copy, image, video, alt = '', align = 'left' }: { id?: string; eyebrow: string; title: string; copy: string; image?: string; video?: string; alt?: string; align?: 'left' | 'right'; }) {
+  const contentAlign = align === 'right' ? 'lg:ml-auto' : '';
+  return <section id={id} className="relative min-h-[82svh] overflow-hidden bg-deep text-white">{image ? <><Image src={image} alt="" fill className="scale-110 object-cover opacity-45 blur-md" sizes="100vw" aria-hidden="true" /><Image src={image} alt={alt} fill className="object-contain" sizes="100vw" /></> : null}{video ? <><video className="absolute inset-0 h-full w-full scale-110 object-cover opacity-45 blur-md" src={video} autoPlay muted loop playsInline preload="auto" aria-hidden="true" /><video className="absolute inset-0 h-full w-full object-contain" src={video} autoPlay muted loop playsInline preload="auto" /></> : null}<div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,32,26,0.94)_0%,rgba(5,32,26,0.64)_46%,rgba(5,32,26,0.20)_100%)]" /><div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,32,26,0.20)_0%,rgba(5,32,26,0.18)_45%,rgba(5,32,26,0.90)_100%)]" /><div className="section-shell relative z-10 flex min-h-[82svh] items-end py-12 lg:py-16"><Reveal className={`max-w-2xl ${contentAlign}`}><span className="section-kicker text-leaf">{eyebrow}</span><h2 className="mt-4 text-balance text-4xl font-bold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-[4rem]">{title}</h2><p className="mt-5 text-base leading-8 text-white/80 sm:text-lg">{copy}</p></Reveal></div></section>;
 }
 
 function OverviewSection() {
-  return (
-    <section id="beneficios" className="relative py-14 lg:py-20">
-      <div className="section-shell">
-        <Reveal className="max-w-3xl">
-          <span className="section-kicker">Beneficios principales</span>
-          <h2 className="section-title mt-4 max-w-4xl">Una solución solar bien planteada empieza por confianza, claridad y buen acompañamiento.</h2>
-          <p className="section-copy mt-5 max-w-3xl">
-            La propuesta de valor de Solar LED gira alrededor de tres ideas simples: ahorrar mejor, instalar con criterio técnico y acompañar al cliente para que tome una decisión segura.
-          </p>
-        </Reveal>
-
-        <Stagger className="mt-10 grid gap-4 lg:grid-cols-3">
-          {highlights.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Reveal key={item.title} className="panel-card p-6">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-cyan">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-5 text-xl font-bold text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-white/70">{item.copy}</p>
-              </Reveal>
-            );
-          })}
-        </Stagger>
-      </div>
-    </section>
-  );
-}
-
-function SolutionsSection() {
-  return (
-    <section className="pb-14 lg:pb-20">
-      <div className="section-shell grid gap-5 xl:grid-cols-[0.92fr_1.08fr]">
-        <Reveal className="panel-card flex flex-col justify-between p-6 sm:p-7">
-          <div>
-            <span className="section-kicker">Soluciones</span>
-            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">Solar LED ofrece soluciones adaptadas al hogar y al negocio.</h2>
-            <p className="mt-5 text-base leading-8 text-white/75">
-              Cada proyecto se estudia para proponer una solución acorde al tipo de propiedad, al nivel de consumo y al objetivo de ahorro del cliente.
-            </p>
-          </div>
-
-          <div className="mt-8 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
-              <House className="h-5 w-5 text-cyan" />
-              <p className="mt-3 text-lg font-semibold text-white">Residencial</p>
-              <p className="mt-2 text-sm leading-7 text-white/70">Para hogares que desean optimizar su consumo y convertir el techo en una inversión inteligente.</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
-              <Building2 className="h-5 w-5 text-cyan" />
-              <p className="mt-3 text-lg font-semibold text-white">Comercial</p>
-              <p className="mt-2 text-sm leading-7 text-white/70">Para empresas y propiedades que requieren una solución robusta y bien estructurada.</p>
-            </div>
-          </div>
-        </Reveal>
-
-        <div className="grid gap-4 md:grid-cols-2">
-          {solutions.map((solution) => (
-            <Reveal key={solution.title} className="video-card relative min-h-[420px] overflow-hidden rounded-[2rem]">
-              <Image
-                src={solution.image}
-                alt={solution.alt}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 30vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#04091f]/95 via-[#04091f]/34 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">{solution.title.includes('residenciales') ? 'Hogar' : 'Negocio'}</p>
-                <h3 className="mt-3 text-2xl font-bold text-white">{solution.title}</h3>
-                <p className="mt-3 max-w-md text-sm leading-7 text-white/75">{solution.copy}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProposalSection() {
-  return (
-    <section id="propuesta" className="py-14 lg:py-20">
-      <div className="section-shell">
-        <Reveal className="max-w-3xl">
-          <span className="section-kicker">Propuesta comercial</span>
-          <h2 className="section-title mt-4">El contenido del PDF ahora refuerza la presentación de la marca dentro de la web.</h2>
-          <p className="section-copy mt-5 max-w-3xl">
-            Se incorporó material del documento compartido para mostrar un caso referencial con datos claros, respaldo visual y una presentación más completa de la propuesta solar.
-          </p>
-        </Reveal>
-
-        <div className="mt-10 grid gap-5 xl:grid-cols-[0.95fr_1.05fr]">
-          <Reveal className="panel-card overflow-hidden p-6 sm:p-7">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/85">
-                <FileCheck2 className="h-4 w-4 text-cyan" />
-                Caso referencial
-              </span>
-              <span className="rounded-full border border-cyan/20 bg-cyan/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-cyan">
-                Proyecto La Marquesa
-              </span>
-            </div>
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-2">
-              {proposalStats.map((stat) => (
-                <div key={stat.label} className="rounded-[1.4rem] border border-white/10 bg-white/[0.05] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/50">{stat.label}</p>
-                  <p className="mt-2 text-2xl font-bold text-white">{stat.value}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-5">
-              <div className="grid gap-4 sm:grid-cols-3">
-                <div>
-                  <BarChart3 className="h-5 w-5 text-cyan" />
-                  <p className="mt-3 font-semibold text-white">Análisis del consumo</p>
-                  <p className="mt-2 text-sm leading-7 text-white/70">Se muestra el estudio del proyecto para dimensionar correctamente el sistema y proyectar su rendimiento.</p>
-                </div>
-                <div>
-                  <ChartNoAxesCombined className="h-5 w-5 text-cyan" />
-                  <p className="mt-3 font-semibold text-white">Retorno estimado</p>
-                  <p className="mt-2 text-sm leading-7 text-white/70">El material presenta la cobertura estimada y el retorno para ayudar a visualizar la inversión.</p>
-                </div>
-                <div>
-                  <BadgeCheck className="h-5 w-5 text-cyan" />
-                  <p className="mt-3 font-semibold text-white">Garantías y alcance</p>
-                  <p className="mt-2 text-sm leading-7 text-white/70">También se integran servicios incluidos, garantías y alcance del proyecto de forma más clara.</p>
-                </div>
-              </div>
-            </div>
-          </Reveal>
-
-          <div className="grid gap-4 lg:grid-cols-3">
-            {['/proposal/proposal-page-1.png', '/proposal/proposal-page-2.png', '/proposal/proposal-page-3.png'].map((src, index) => (
-              <Reveal key={src} className="panel-card overflow-hidden p-3">
-                <div className="relative aspect-[5/6] overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#081020]">
-                  <Image
-                    src={src}
-                    alt={`Vista previa de la propuesta comercial Solar LED ${index + 1}`}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 1024px) 100vw, 22vw"
-                  />
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProcessSection() {
-  return (
-    <section id="proceso" className="py-14 lg:py-20">
-      <div className="section-shell">
-        <div className="grid gap-5 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
-          <Reveal className="panel-card relative min-h-[460px] overflow-hidden rounded-[2rem] p-0">
-            <video
-              className="absolute inset-0 h-full w-full object-cover"
-              src="/videos/gallery/equipment-move.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="auto"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#04091f]/92 via-[#04091f]/38 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
-              <span className="section-kicker">Proceso de trabajo</span>
-              <h2 className="mt-4 max-w-xl text-balance text-3xl font-bold text-white sm:text-4xl">Un proyecto solar funciona mejor cuando cada etapa se comunica con claridad.</h2>
-              <p className="mt-4 max-w-xl text-sm leading-8 text-white/75">
-                Solar LED acompaña al cliente desde la evaluación hasta la instalación, manteniendo el foco en ahorro, seguridad y confianza.
-              </p>
-            </div>
-          </Reveal>
-
-          <div>
-            <Reveal className="max-w-3xl">
-              <span className="section-kicker">Cómo trabajamos</span>
-              <h2 className="section-title mt-4">Un camino claro ayuda a tomar mejores decisiones.</h2>
-              <p className="section-copy mt-5 max-w-2xl">
-                El proceso se organiza en pasos simples para que el cliente entienda cómo se analiza el proyecto, cómo se plantea la propuesta y cómo se ejecuta la instalación.
-              </p>
-            </Reveal>
-
-            <Stagger className="mt-8 grid gap-4 sm:grid-cols-2">
-              {processSteps.map((step, index) => (
-                <Reveal key={step.title} className="panel-card p-5">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-sm font-bold text-white">
-                    {index + 1}
-                  </div>
-                  <h3 className="mt-4 text-xl font-bold text-white">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/70">{step.description}</p>
-                </Reveal>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="bg-white py-16 text-deep lg:py-24"><div className="section-shell"><Reveal className="max-w-3xl"><span className="section-kicker">Por qué elegir Solarled</span><h2 className="section-title mt-4 max-w-4xl">Una instalación solar debe verse bien, funcionar bien y estar respaldada por calidad.</h2><p className="section-copy mt-5 max-w-3xl">El rediseño enfoca la marca en lo que más vende: paneles solares visibles, mensajes claros, confianza técnica y evidencia de calidad en productos e instalación.</p></Reveal><Stagger className="mt-10 grid gap-4 lg:grid-cols-3">{highlights.map((item) => { const Icon = item.icon; return <Reveal key={item.title} className="panel-card p-6"><div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-leaf/[0.14] text-leaf"><Icon className="h-5 w-5" /></div><h3 className="mt-5 text-xl font-bold text-deep">{item.title}</h3><p className="mt-3 text-sm leading-7 text-steel">{item.copy}</p></Reveal>; })}</Stagger></div></section>;
 }
 
 function ServicesSection() {
-  return (
-    <section id="servicios" className="py-14 lg:py-20">
-      <div className="section-shell grid gap-5 xl:grid-cols-[0.88fr_1.12fr] xl:items-start">
-        <Reveal className="panel-card p-6 sm:p-7">
-          <span className="section-kicker">Servicios</span>
-          <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">Servicios enfocados en ahorro, instalación y acompañamiento.</h2>
-          <p className="mt-5 text-base leading-8 text-white/75">
-            Solar LED presenta su oferta con mayor claridad para que el visitante entienda rápidamente qué hace la empresa y cómo puede ayudarle a reducir su gasto energético.
-          </p>
-          <div className="mt-6 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
-              <SunMedium className="h-5 w-5 text-cyan" />
-              <p className="mt-3 font-semibold text-white">Ahorro sostenible</p>
-              <p className="mt-2 text-sm leading-7 text-white/70">Soluciones pensadas para generar un impacto real en la factura eléctrica.</p>
-            </div>
-            <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.05] p-4">
-              <BatteryCharging className="h-5 w-5 text-cyan" />
-              <p className="mt-3 font-semibold text-white">Respaldo técnico</p>
-              <p className="mt-2 text-sm leading-7 text-white/70">Asesoría y acompañamiento durante el proceso de evaluación, instalación y seguimiento.</p>
-            </div>
-          </div>
-        </Reveal>
+  return <section id="servicios" className="bg-ivory py-16 text-deep lg:py-24"><div className="section-shell"><Reveal className="max-w-3xl"><span className="section-kicker">Servicios</span><h2 className="section-title mt-4 max-w-4xl">Soluciones solares para hogares y negocios que buscan ahorrar con seguridad.</h2><p className="section-copy mt-5 max-w-3xl">La comunicación ahora es más directa: qué hace Solarled, para quién trabaja y por qué sus equipos certificados elevan la confianza del proyecto.</p></Reveal><Stagger className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">{services.map((service) => { const Icon = service.icon; return <Reveal key={service.title} className="panel-card flex min-h-[190px] items-start gap-4 p-5"><div className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-leaf/[0.14] text-leaf"><Icon className="h-5 w-5" /></div><div><h3 className="text-lg font-bold text-deep">{service.title}</h3><p className="mt-2 text-sm leading-7 text-steel">{service.copy}</p></div></Reveal>; })}</Stagger></div></section>;
+}
 
-        <Stagger className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {serviceCards.map((service) => {
-            const Icon = service.icon;
-            return (
-              <Reveal key={service.title} className="panel-card flex min-h-[190px] items-start gap-4 p-5">
-                <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-white/10 text-cyan">
-                  <Icon className="h-4 w-4" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-white/70">{service.copy}</p>
-                </div>
-              </Reveal>
-            );
-          })}
-        </Stagger>
-      </div>
-    </section>
-  );
+function ProcessSection() {
+  return <section className="bg-white py-16 text-deep lg:py-24"><div className="section-shell"><div className="grid gap-10 lg:grid-cols-[0.84fr_1.16fr] lg:items-start"><Reveal><span className="section-kicker">Cómo trabajamos</span><h2 className="section-title mt-4">Un proceso simple para una decisión más segura.</h2><p className="section-copy mt-5">La energía solar se entiende mejor cuando el cliente sabe qué pasa en cada etapa. Por eso el flujo debe ser claro, visual y fácil de seguir.</p></Reveal><Stagger className="grid gap-4 sm:grid-cols-2">{processSteps.map((step, index) => <Reveal key={step.title} className="panel-card p-5"><div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-deep text-sm font-bold text-white">{index + 1}</div><h3 className="mt-4 text-xl font-bold text-deep">{step.title}</h3><p className="mt-3 text-sm leading-7 text-steel">{step.description}</p></Reveal>)}</Stagger></div></div></section>;
 }
 
 function FAQSection() {
-  return (
-    <section id="faq" className="py-14 lg:py-20">
-      <div className="section-shell grid gap-8 xl:grid-cols-[0.82fr_1.18fr]">
-        <Reveal className="max-w-xl">
-          <span className="section-kicker">Preguntas frecuentes</span>
-          <h2 className="section-title mt-4">Resuelve dudas antes de tomar la decisión.</h2>
-          <p className="section-copy mt-5">
-            Estas respuestas ayudan a que el visitante comprenda mejor el proceso y se anime a solicitar una evaluación para su proyecto.
-          </p>
-        </Reveal>
-        <div className="grid gap-4">
-          {faqs.map((faq) => (
-            <FAQItem key={faq.question} question={faq.question} answer={faq.answer} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="faq" className="bg-deep py-16 text-white lg:py-24"><div className="section-shell grid gap-8 xl:grid-cols-[0.82fr_1.18fr]"><Reveal><span className="section-kicker text-leaf">Preguntas frecuentes</span><h2 className="mt-4 text-balance text-4xl font-bold text-white sm:text-5xl">Respuestas rápidas antes de solicitar una evaluación.</h2><p className="mt-5 text-base leading-8 text-white/[0.72]">La información está pensada para resolver dudas comunes y llevar al visitante directo a una conversación por WhatsApp.</p></Reveal><Stagger className="grid gap-3">{faqs.map((faq) => <Reveal key={faq.question}><FAQItem question={faq.question} answer={faq.answer} /></Reveal>)}</Stagger></div></section>;
 }
 
 function ContactSection() {
-  return (
-    <section id="contacto" className="py-14 lg:py-20">
-      <div className="section-shell">
-        <div className="grid gap-5 xl:grid-cols-[0.92fr_1.08fr] xl:items-start">
-          <Reveal className="panel-card p-6 sm:p-7 lg:p-8">
-            <span className="section-kicker">Contacto</span>
-            <h2 className="mt-4 text-balance text-3xl font-bold text-white sm:text-4xl">Solicita una evaluación y descubre el potencial de tu proyecto.</h2>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-white/75">
-              El formulario envía la información por WhatsApp para mantener una atención rápida y directa. También puedes escribir por correo si prefieres ese canal.
-            </p>
-
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-              <InfoPill icon={<Phone className="h-4 w-4" />} text={siteConfig.phone} />
-              <InfoPill icon={<Mail className="h-4 w-4" />} text={siteConfig.email} />
-              <InfoPill icon={<MapPin className="h-4 w-4" />} text="Costa del Este, Panamá" />
-            </div>
-
-            <div className="mt-8">
-              <ContactForm />
-            </div>
-          </Reveal>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            <Reveal className="panel-card overflow-hidden p-3">
-              <div className="relative min-h-[330px] overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#081020]">
-                <Image
-                  src="/proposal/proposal-page-1.png"
-                  alt="Vista previa de propuesta Solar LED"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 1024px) 100vw, 30vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#04091f]/96 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan">Caso referencial</p>
-                  <h3 className="mt-3 text-2xl font-bold text-white">Presentación comercial incorporada a la web</h3>
-                  <p className="mt-3 text-sm leading-7 text-white/75">
-                    Parte del PDF entregado ahora se aprovecha visualmente para reforzar la propuesta y la credibilidad de la marca.
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal className="panel-card flex flex-col justify-between p-6">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.26em] text-cyan">¿Qué puedes enviar?</p>
-                <h3 className="mt-4 text-2xl font-bold text-white">Mientras más información compartas, mejor será la evaluación.</h3>
-                <p className="mt-4 text-sm leading-7 text-white/75">
-                  Puedes escribir con tu ubicación, el tipo de propiedad, una referencia de tu factura y cualquier duda inicial sobre el proyecto.
-                </p>
-              </div>
-              <div className="mt-6 grid gap-3">
-                {['Ubicación del proyecto', 'Tipo de propiedad', 'Factura o consumo estimado', 'Objetivo principal de ahorro'].map((item) => (
-                  <div key={item} className="rounded-[1.3rem] border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white/85">
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return <section id="contacto" className="relative overflow-hidden bg-[#06241f] py-16 text-white lg:py-24"><div className="absolute left-[-8rem] top-[-8rem] h-72 w-72 rounded-full bg-leaf/[0.18] blur-3xl" /><div className="absolute bottom-[-8rem] right-[-8rem] h-72 w-72 rounded-full bg-cyan/[0.18] blur-3xl" /><div className="section-shell relative z-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start"><Reveal><span className="section-kicker text-leaf">Contacto</span><h2 className="mt-4 text-balance text-4xl font-bold text-white sm:text-5xl">Solicita una evaluación para tu hogar o negocio.</h2><p className="mt-5 text-base leading-8 text-white/75">Comparte tu ubicación, tipo de propiedad y consumo aproximado. Con eso se puede iniciar una conversación más clara sobre tu proyecto solar.</p><div className="mt-8 grid gap-4 text-sm text-white/[0.76]"><InfoLine icon={<Phone className="h-5 w-5" />} text={siteConfig.whatsappDisplay} /><InfoLine icon={<Mail className="h-5 w-5" />} text={siteConfig.email} /><InfoLine icon={<MapPin className="h-5 w-5" />} text={siteConfig.address} /></div></Reveal><Reveal className="rounded-[2rem] border border-white/[0.12] bg-white/[0.06] p-5 shadow-glow backdrop-blur-xl sm:p-7"><ContactForm /></Reveal></div></section>;
 }
 
 function FinalCTASection() {
-  return (
-    <section className="pb-14 lg:pb-20">
-      <div className="section-shell">
-        <Reveal className="panel-card relative min-h-[420px] overflow-hidden rounded-[2.2rem] p-0">
-          <video
-            className="absolute inset-0 h-full w-full object-cover"
-            src="/videos/gallery/install-team.mp4"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,9,31,0.92)_0%,rgba(4,9,31,0.76)_42%,rgba(4,9,31,0.54)_100%)]" />
-          <div className="relative z-10 flex min-h-[420px] items-end p-6 sm:p-8 lg:p-10">
-            <div className="max-w-3xl">
-              <span className="section-kicker">Solicita tu evaluación</span>
-              <h2 className="mt-4 text-balance text-4xl font-bold text-white sm:text-5xl lg:text-[3.6rem]">
-                Dale a tu propiedad una solución solar seria, bien pensada y lista para ahorrar.
-              </h2>
-              <p className="mt-5 max-w-2xl text-base leading-8 text-white/75 sm:text-lg">
-                Si quieres conocer una propuesta para tu hogar o tu negocio, escríbenos por WhatsApp y cuéntanos un poco sobre tu proyecto.
-              </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full bg-cyan px-6 text-sm font-semibold text-white transition hover:scale-[1.02]"
-                >
-                  Cotizar por WhatsApp
-                </a>
-                <a
-                  href={`mailto:${siteConfig.email}`}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-white/10 px-6 text-sm font-semibold text-white backdrop-blur-md transition hover:border-white/35"
-                >
-                  Escribir por correo
-                </a>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
+  return <section className="relative min-h-[78svh] overflow-hidden bg-deep text-white"><video className="absolute inset-0 h-full w-full scale-110 object-cover opacity-45 blur-md" src="/videos/gallery/install-team.mp4" autoPlay muted loop playsInline preload="auto" aria-hidden="true" /><video className="absolute inset-0 h-full w-full object-contain" src="/videos/gallery/install-team.mp4" autoPlay muted loop playsInline preload="auto" /><div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,32,26,0.95)_0%,rgba(5,32,26,0.68)_45%,rgba(5,32,26,0.18)_100%)]" /><div className="section-shell relative z-10 flex min-h-[78svh] items-end py-12 lg:py-16"><Reveal className="max-w-3xl"><span className="section-kicker text-leaf">Cotiza tu sistema</span><h2 className="mt-4 text-balance text-4xl font-bold leading-[1.02] tracking-[-0.04em] text-white sm:text-5xl lg:text-[4.4rem]">Energía solar con imagen premium, calidad visible y respaldo técnico.</h2><p className="mt-5 max-w-2xl text-base leading-8 text-white/[0.78] sm:text-lg">Escríbele a Solarled y da el primer paso para evaluar tu propiedad, conocer una propuesta y reducir tu factura eléctrica.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`} target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center rounded-full bg-leaf px-7 text-sm font-bold text-deep transition hover:scale-[1.02]">Cotizar por WhatsApp</a><a href={`mailto:${siteConfig.email}`} className="inline-flex min-h-12 items-center justify-center rounded-full border border-white/[0.22] bg-white/10 px-7 text-sm font-bold text-white backdrop-blur-md transition hover:border-white/40">Escribir por correo</a></div></Reveal></div></section>;
 }
 
 function Footer() {
-  return (
-    <footer className="border-t border-white/10 bg-[#04091f]">
-      <div className="section-shell py-8 sm:py-10 lg:py-12">
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div>
-            <Image
-              src="/brand/solarled-logo-clean.png"
-              alt="Solar LED"
-              width={1086}
-              height={376}
-              className="h-auto w-[210px] sm:w-[260px] lg:w-[320px]"
-            />
-            <p className="mt-5 max-w-xl text-sm leading-8 text-white/66">
-              Soluciones de energía solar para hogares y negocios en Panamá, enfocadas en ahorro, confianza y una ejecución profesional.
-            </p>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:justify-self-end">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Contacto</p>
-              <div className="mt-4 space-y-3 text-sm text-white/75">
-                <p>{siteConfig.phone}</p>
-                <p>{siteConfig.whatsappDisplay}</p>
-                <p className="break-all">{siteConfig.email}</p>
-              </div>
-            </div>
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-cyan">Ubicación</p>
-              <div className="mt-4 space-y-3 text-sm text-white/75">
-                <p>{siteConfig.address}</p>
-                <a
-                  href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 text-white transition hover:text-cyan"
-                >
-                  Escribir por WhatsApp
-                  <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
+  return <footer className="bg-deep text-white"><div className="section-shell py-8 sm:py-10 lg:py-12"><div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end"><div><Image src="/brand/solarled-logo-color.png" alt="Solarled" width={1280} height={228} className="h-auto w-[220px] sm:w-[280px] lg:w-[350px]" /><p className="mt-5 max-w-xl text-sm leading-8 text-white/[0.66]">Soluciones de energía solar para hogares y negocios en Panamá, enfocadas en ahorro, calidad certificada y una ejecución profesional.</p></div><div className="grid gap-6 sm:grid-cols-2 lg:justify-self-end"><div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-leaf">Contacto</p><div className="mt-4 space-y-3 text-sm text-white/75"><p>{siteConfig.phone}</p><p>{siteConfig.whatsappDisplay}</p><p className="break-all">{siteConfig.email}</p></div></div><div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-leaf">Ubicación</p><div className="mt-4 space-y-3 text-sm text-white/75"><p>{siteConfig.address}</p><a href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-semibold text-white">Hablar por WhatsApp<ArrowRight className="h-4 w-4" /></a></div></div></div></div><div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/[0.45] sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Solarled. Todos los derechos reservados.</p><p>Diseño enfocado en energía solar, calidad y confianza.</p></div></div></footer>;
 }
 
-function InfoPill({ icon, text }: { icon: ReactNode; text: string }) {
-  return (
-    <div className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.05] px-4 py-3 text-sm text-white/80">
-      <span className="text-cyan">{icon}</span>
-      <span className="truncate">{text}</span>
-    </div>
-  );
+function InfoLine({ icon, text }: { icon: ReactNode; text: string }) {
+  return <div className="flex gap-3 rounded-3xl border border-white/10 bg-white/[0.05] p-4"><span className="text-leaf">{icon}</span><span>{text}</span></div>;
 }

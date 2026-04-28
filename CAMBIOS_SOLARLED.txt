@@ -1,0 +1,35 @@
+CAMBIOS APLICADOS - SOLARLED
+
+1. Logo a color agregado sin fondo negro:
+   - public/brand/solarled-logo-color.png
+   - public/images/brand/solarled-logo-color.png
+
+2. Video 1 colocado como HERO principal:
+   - public/videos/hero/video-1-hero.mp4
+   - public/images/hero/video-1-poster.jpg
+
+3. Rediseño visual:
+   - Se eliminó la base azul dominante.
+   - Se aplicó estética limpia con verde, celeste, blanco y fondo oscuro solo donde ayuda al contraste.
+   - El hero usa video responsive con fondo blur y video completo en object-contain para que se vea entero.
+   - Se agregaron textos con animación progresiva en el hero.
+
+4. Marca corregida:
+   - Se reemplazó Solar LED por Solarled en textos, metadata, formulario y footer.
+
+5. Certificaciones:
+   - Nueva sección fuerte de certificaciones de productos.
+   - FAQ actualizado para recalcar certificaciones y respaldo técnico.
+
+6. Archivos modificados:
+   - app/page.tsx
+   - app/globals.css
+   - app/layout.tsx
+   - components/logo.tsx
+   - components/navbar.tsx
+   - components/preloader.tsx
+   - components/contact-form.tsx
+   - components/faq.tsx
+   - components/whatsapp-float.tsx
+   - lib/site.ts
+   - tailwind.config.ts
