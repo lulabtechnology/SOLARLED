@@ -8,9 +8,9 @@ import { siteConfig } from '@/lib/site';
 const links = [
   { href: '#beneficios', label: 'Beneficios' },
   { href: '#certificaciones', label: 'Certificaciones' },
-  { href: '#proceso', label: 'Proceso' },
+  { href: '#experiencia', label: 'Experiencia' },
   { href: '#servicios', label: 'Servicios' },
-  { href: '#faq', label: 'FAQ' },
+  { href: '#proceso', label: 'Proceso' },
   { href: '#contacto', label: 'Contacto' }
 ];
 

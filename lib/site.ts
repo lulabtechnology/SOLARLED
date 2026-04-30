@@ -11,7 +11,8 @@ export const siteConfig = {
 
 export const faqs = [
   { question: '¿Cómo sé si vale la pena instalar paneles solares en mi propiedad?', answer: 'Todo inicia con una evaluación del proyecto, el tipo de propiedad y el consumo mensual aproximado. Con esa información se puede recomendar una solución más inteligente y aterrizada.' },
-  { question: '¿Trabajan proyectos residenciales y comerciales?', answer: 'Sí. Solarled atiende hogares, negocios y otros proyectos que quieran reducir su gasto eléctrico con una instalación profesional.' },
+  { question: '¿Trabajan proyectos residenciales y comerciales?', answer: 'Sí. Solarled atiende casas, edificios residenciales, negocios y otros proyectos que quieran reducir su gasto eléctrico con una instalación profesional.' },
+  { question: '¿Por qué es importante la certificación UL?', answer: 'UL (Underwriters Laboratories) es una certificación internacional asociada a la seguridad de productos eléctricos. En Panamá es importante porque se buscan equipos con estándares reconocidos para aprobación y uso seguro.' },
   { question: '¿Los productos tienen certificaciones?', answer: 'La propuesta debe apoyarse en equipos con certificaciones, garantías y fichas técnicas verificables según la marca y el modelo seleccionado para cada proyecto.' },
   { question: '¿Cuánto tarda el proceso?', answer: 'Depende del alcance del proyecto, pero el flujo se plantea de forma clara: evaluación, propuesta, instalación y acompañamiento.' },
   { question: '¿Necesito tener toda la información técnica antes de escribirles?', answer: 'No. Basta con compartir tu ubicación, el tipo de propiedad y una referencia de tu factura o consumo mensual aproximado para iniciar la conversación.' },
