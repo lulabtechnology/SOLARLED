@@ -41,13 +41,15 @@ const experienceVideos = [
     eyebrow: 'Residencial · Casas',
     title: 'Techos residenciales con más paneles visibles.',
     copy: 'La intención es que el visitante vea casas reales, techos amplios y sistemas solares que comunican ahorro, experiencia y confianza desde el primer vistazo.',
-    src: '/videos/gallery/residencial-casas.mp4'
+    src: '/videos/gallery/residencial-casas.mp4',
+    portrait: true
   },
   {
     eyebrow: 'Residencial · Edificios',
     title: 'Edificios residenciales con instalaciones limpias y funcionales.',
     copy: 'Este bloque refuerza que Solarled también puede atender propiedades verticales, edificios y espacios con alto potencial de generación solar.',
-    src: '/videos/gallery/residencial-edificios.mp4'
+    src: '/videos/gallery/residencial-edificios.mp4',
+    portrait: true
   },
   {
     eyebrow: 'Comercial',
@@ -190,11 +192,15 @@ function ExperienceVideosSection() {
   );
 }
 
-function WideVideoFeature({ eyebrow, title, copy, src }: { eyebrow: string; title: string; copy: string; src: string }) {
+function WideVideoFeature({ eyebrow, title, copy, src, portrait = false }: { eyebrow: string; title: string; copy: string; src: string; portrait?: boolean }) {
+  const videoClassName = portrait
+    ? 'mx-auto h-auto w-full object-contain lg:h-[88svh] lg:w-full'
+    : 'h-auto w-full object-contain';
+
   return (
     <Reveal>
       <div className="relative left-1/2 w-screen -translate-x-1/2 overflow-hidden bg-deep">
-        <video className="h-[62svh] min-h-[430px] w-full object-cover sm:h-[70svh] lg:min-h-[560px]" src={src} autoPlay muted loop playsInline preload="metadata" />
+        <video className={videoClassName} src={src} autoPlay muted loop playsInline preload="metadata" />
       </div>
       <div className="section-shell pt-5 sm:pt-6">
         <div className="max-w-3xl">
@@ -231,7 +237,7 @@ function InstallationSection() {
             <p className="mt-5 text-base leading-8 text-white/75">Se agregó el video de instalación en una posición estratégica para reforzar que Solarled no solo vende paneles: también ejecuta, integra equipos y cuida el montaje.</p>
           </Reveal>
           <Reveal className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] shadow-glow">
-            <video className="h-[620px] max-h-[78svh] w-full object-cover" src="/videos/gallery/instalacion-profesional.mp4" autoPlay muted loop playsInline preload="metadata" />
+            <video className="aspect-video h-auto w-full object-contain" src="/videos/gallery/instalacion-profesional.mp4" autoPlay muted loop playsInline preload="metadata" />
           </Reveal>
         </div>
       </div>
@@ -259,7 +265,7 @@ function StrategicExperienceSection() {
         <Reveal className="max-w-4xl"><span className="section-kicker">Experiencia Solarled</span><h2 className="section-title mt-4 max-w-5xl">El proyecto se vende mejor cuando se muestra la experiencia completa.</h2><p className="section-copy mt-5 max-w-3xl">Este video se dejó como cierre visual antes de las dudas frecuentes para reforzar confianza, instalaciones reales y capacidad de ejecución.</p></Reveal>
       </div>
       <div className="mt-10">
-        <WideVideoFeature eyebrow="Evidencia visual" title="Más paneles, más contexto y una imagen más cercana a proyectos reales." copy="La sección ayuda a que el visitante no solo lea sobre Solarled, sino que vea el tipo de trabajo y la escala que puede esperar." src="/videos/gallery/experiencia-solarled.mp4" />
+        <WideVideoFeature eyebrow="Evidencia visual" title="Más paneles, más contexto y una imagen más cercana a proyectos reales." copy="La sección ayuda a que el visitante no solo lea sobre Solarled, sino que vea el tipo de trabajo y la escala que puede esperar." src="/videos/gallery/experiencia-solarled.mp4" portrait />
       </div>
     </section>
   );
@@ -278,7 +284,7 @@ function FinalCTASection() {
 }
 
 function Footer() {
-  return <footer className="bg-deep text-white"><div className="section-shell py-8 sm:py-10 lg:py-12"><div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end"><div><Image src="/brand/solarled-logo-color.png" alt="Solarled" width={1280} height={228} className="h-auto w-[220px] sm:w-[280px] lg:w-[350px]" /><p className="mt-5 max-w-xl text-sm leading-8 text-white/[0.66]">Soluciones de energía solar para hogares y negocios en Panamá, enfocadas en ahorro, calidad certificada y una ejecución profesional.</p></div><div className="grid gap-6 sm:grid-cols-2 lg:justify-self-end"><div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-leaf">Contacto</p><div className="mt-4 space-y-3 text-sm text-white/75"><p>{siteConfig.phone}</p><p>{siteConfig.whatsappDisplay}</p><p className="break-all">{siteConfig.email}</p></div></div><div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-leaf">Ubicación</p><div className="mt-4 space-y-3 text-sm text-white/75"><p>{siteConfig.address}</p><a href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-semibold text-white">Hablar por WhatsApp<ArrowRight className="h-4 w-4" /></a></div></div></div></div><div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/[0.45] sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Solarled. Todos los derechos reservados.</p><p>Diseño enfocado en energía solar, calidad y confianza.</p></div></div></footer>;
+  return <footer className="bg-deep text-white"><div className="section-shell py-8 sm:py-10 lg:py-12"><div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end"><div><Image src="/brand/solarled-logo-color.png" alt="Solarled" width={1280} height={228} className="h-auto w-[220px] sm:w-[280px] lg:w-[350px]" /><p className="mt-5 max-w-xl text-sm leading-8 text-white/[0.66]">Soluciones de energía solar para hogares y negocios en Panamá, enfocadas en ahorro, calidad certificada y una ejecución profesional.</p></div><div className="grid gap-6 sm:grid-cols-2 lg:justify-self-end"><div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-leaf">Contacto</p><div className="mt-4 space-y-3 text-sm text-white/75"><p>{siteConfig.phone}</p><p>{siteConfig.whatsappDisplay}</p><p className="break-all">{siteConfig.email}</p></div></div><div><p className="text-xs font-semibold uppercase tracking-[0.28em] text-leaf">Ubicación</p><div className="mt-4 space-y-3 text-sm text-white/75"><p>{siteConfig.address}</p><a href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(siteConfig.whatsappMessage)}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 font-semibold text-white">Hablar por WhatsApp<ArrowRight className="h-4 w-4" /></a></div></div></div></div><div className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/[0.45] sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Solarled. Todos los derechos reservados.</p><p>Diseño y construcción por <a href="https://www.lulabtech.com/" target="_blank" rel="noreferrer" className="font-semibold text-leaf transition hover:text-white">LulabTech</a>.</p></div></div></footer>;
 }
 
 function InfoLine({ icon, text }: { icon: ReactNode; text: string }) {
